@@ -3,7 +3,6 @@ import { Avatar } from "@mui/material";
 import { collection, where, query } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
-import styled from "styled-components";
 import getRecipientEmail from "../utils/getRecipientEmail";
 import { auth, db } from "../firebase";
 
@@ -30,7 +29,7 @@ function Chat({ id, users }) {
       onClick={enterChat}
     >
       {recipient ? (
-        <Avatar className="m-1 mr-3" src={recipient?.photoURL} />
+        <Avatar className="m-1 mr-3" src={recipient?.photo} />
       ) : (
         <Avatar className="m-1 mr-3">{recipientEmail[0]}</Avatar>
       )}

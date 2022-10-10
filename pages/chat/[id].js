@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import Head from "next/head";
 import Sidebar from "../../components/Sidebar";
 import ChatScreen from "../../components/ChatScreen";
@@ -13,7 +12,7 @@ import {
 } from "firebase/firestore";
 import { auth, db } from "../../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import getRecipientEmail from "../../../utils/getRecipientEmail";
+import getRecipientEmail from "../../utils/getRecipientEmail";
 
 function Chat({ chat, messages }) {
   const [user] = useAuthState(auth);
@@ -50,10 +49,11 @@ export async function getServerSideProps(context) {
       timestamp: messages.timestamp.toDate().getTime(),
     }));
 
-  const chatRes = await getDoc(ref);
+  const chatRef = await getDoc(ref);
+
   const chat = {
-    id: chatRes.id,
-    ...chatRes.data(),
+    id: chatRef.id,
+    ...chatRef.data(),
   };
 
   return {
@@ -63,18 +63,3 @@ export async function getServerSideProps(context) {
     },
   };
 }
-
-const Container = styled.div`
-  display: flex;
-`;
-
-const ChatContainer = styled.div`
-  flex: 1;
-  overflow: scroll;
-  height: 100vh;
-  ::-webkit-scrollbar {
-    display: none;
-    -ms-overflow-style: none; /*IE and Edge*/
-    scrollbar-width: none; /*Firefox*/
-  }
-`;

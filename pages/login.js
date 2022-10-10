@@ -15,11 +15,18 @@ function Login() {
         <title>Login</title>
       </Head>
       <div className="p-20 flex flex-col items-center bg-white rounded-sm shadow-md ">
+        <h1 className="p-2 pb-8 text-blue-900 text-3xl font-extrabold">
+          Chat-App
+        </h1>
         <TextsmsIcon
           fontSize="ingerit"
           className="text-blue-600 mb-12 text-8xl"
         />
-        <Button onClick={signIn} variant="contained">
+        <Button
+          className="text-gray-500 hover:text-white"
+          onClick={signIn}
+          variant="contained"
+        >
           Sign in with Google
         </Button>
       </div>
