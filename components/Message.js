@@ -10,7 +10,7 @@ function Message({ user, message }) {
   const TypeOfMessage = user === userLoggedIn.email ? "Sender" : "Reciver";
   return (
     <div>
-      <p
+      <div
         className={
           TypeOfMessage == "Sender"
             ? "text-lg w-fit p-3 m-2 pb-5 relative min-w-[5rem] min-h-[4rem]  rounded-lg text-right ml-auto bg-green-100"
@@ -30,7 +30,7 @@ function Message({ user, message }) {
             />
           )}
         </div>
-      </p>
+      </div>
     </div>
   );
 }

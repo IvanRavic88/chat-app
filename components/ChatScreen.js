@@ -229,7 +229,11 @@ function ChatScreen({ messages, chat }) {
             onClick={removeImage}
             className="flex flex-col filter hover: brightness-110 transition duration-150 transform hover:scale-105 cursor-pointer"
           >
-            <img className="h-10 object-contain" src={imageToMessage} />
+            <img
+              className="h-10 object-contain"
+              src={imageToMessage}
+              alt="Message from user"
+            />
             <p className="text-xs text-red-500 text-center">Remove</p>
           </div>
         )}

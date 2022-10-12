@@ -43,7 +43,7 @@ function SearchUser({ openChatsWith }) {
           {searchUser.slice(0, 5).map(({ userEmail, chatId }) => {
             return (
               <div
-                id={chatId}
+                key={chatId}
                 onClick={() => enterChat(chatId)}
                 className="cursor-pointer rounded-lg w-[100%] flex items-center justify-center p-1 hover:bg-red-500 hover:text-white"
               >
