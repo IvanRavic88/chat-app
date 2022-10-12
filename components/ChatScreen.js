@@ -1,6 +1,6 @@
 import Avatar from "@mui/material/Avatar";
 import { IconButton } from "@mui/material";
-import { useState, useRef, createRef } from "react";
+import { useState, useRef, createRef, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db, storage } from "../firebase";
@@ -45,7 +45,9 @@ function ChatScreen({ messages, chat }) {
       orderBy("timestamp", "asc")
     )
   );
-
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
   //Insert emoji
   const emojiChoice = ({ emoji }) => {
     const ref = inputRef.current;
@@ -54,7 +56,6 @@ function ChatScreen({ messages, chat }) {
     const end = input.substring(ref.selectionStart);
     const text = start + emoji + end;
     setInput(text);
-    // setCursorPosition(start.length + emoji.length);
   };
   //open window for selecting emoji
   const handleViewEmoji = () => {
@@ -160,6 +161,7 @@ function ChatScreen({ messages, chat }) {
     reader.onload = (readerEvent) => {
       setImageToMessage(readerEvent.target.result);
     };
+    scrollToBottom();
   };
   const removeImage = () => setImageToMessage(null);
 
