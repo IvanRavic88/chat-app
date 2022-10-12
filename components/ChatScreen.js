@@ -171,7 +171,7 @@ function ChatScreen({ messages, chat }) {
 
   return (
     <div className="relative">
-      <header className="flex sticky top-0 bg-white p-3 items-center z-50 h-20 border-b-2 border-yellow-100">
+      <header className="flex sticky top-0 bg-zinc-800 p-3 items-center z-50 h-20 border-b-2 border-white">
         {recipient ? (
           <Avatar src={recipient?.photo} />
         ) : (
@@ -179,9 +179,9 @@ function ChatScreen({ messages, chat }) {
         )}
 
         <div className="ml-2 flex-1 ">
-          <h3 className="mb-1">{recipientEmail}</h3>
+          <h3 className="mb-1 text-white">{recipientEmail}</h3>
           {recipentSnapshot ? (
-            <p className="text-gray-500 text-xs">
+            <p className="text-zinc-400 text-xs">
               Last active: {` `}
               {recipient?.lastSeen?.toDate() ? (
                 <TimeAgo datetime={recipient?.lastSeen?.toDate()} />
@@ -194,10 +194,10 @@ function ChatScreen({ messages, chat }) {
           )}
         </div>
         <div onClick={() => signOut(auth)} className="cursor-pointer p-2">
-          <h2 className="text-red-600 hover:text-red-700">Logout</h2>
+          <h2 className="text-rose-500 hover:scale-110">Logout</h2>
         </div>
       </header>
-      <div className="p-3 pb-20 pt-20 bg-yellow-50 min-h-[90vh]">
+      <div className="p-3 pb-20 pt-20 bg-gray-50 min-h-[90vh]">
         {showMessages()}
       </div>
 
@@ -205,12 +205,12 @@ function ChatScreen({ messages, chat }) {
 
       <form className="flex items-center sticky bottom-0 p-2 bg-white z-50 rounded-full">
         <IconButton onClick={handleViewEmoji}>
-          <InsertEmoticon className=" text-red-600 hover:text-red-700" />
+          <InsertEmoticon className=" text-teal-600 hover:text-teal-700 hover:scale-110" />
         </IconButton>
         <input
           ref={inputRef}
-          className="flex-1 outline-none bg-slate-white p-2 ml-2 mr-2"
-          placeholder="Send message..."
+          className="flex-1 outline-none bg-zinc-200 rounded-full p-2 pl-5 ml-2 mr-2"
+          placeholder="Type a message here..."
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />{" "}
@@ -241,7 +241,7 @@ function ChatScreen({ messages, chat }) {
           </div>
         )}
         <IconButton onClick={() => filePickerRef.current.click()}>
-          <AddAPhotoIcon className="text-red-600 hover:text-red-700 hover:scale-110 ease-in duration-500" />
+          <AddAPhotoIcon className="text-teal-600 hover:text-teal-700 hover:scale-110 ease-in duration-500" />
           <input
             ref={filePickerRef}
             onChange={addImageToMessage}

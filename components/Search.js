@@ -28,11 +28,11 @@ function SearchUser({ openChatsWith }) {
     setInput("");
   };
   return (
-    <div className="">
-      <div className="border rounded-full w-full hover:shadow-lg focus-within:shadow-lg max-w-md border-gray-200 px-5 py-1 items-center">
-        <SearchIcon className="text-red-600" />
+    <div className="items-center justify-center w-full">
+      <div className="border bg-white rounded-full w-full focus-within:shadow-lg max-w-md border-gray-200 px-5 py-1 items-center">
+        <SearchIcon className="text-rose-700" />
         <input
-          className="outline-none flex-1 ml-2"
+          className="outline-none flex-1 ml-2 "
           placeholder="Search chats"
           onChange={handleSearchUser}
           value={input}

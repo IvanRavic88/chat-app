@@ -28,8 +28,8 @@ function Sidebar() {
   });
 
   return (
-    <div className="flex-1 border-r-2 border-yellow-100 h-[100vh] max-w-xs overflow-y-scroll no-scrollbar">
-      <div className="flex sticky bg-white z-50 space-x-3 items-center p-3 h-20 border-b-2 border-yellow-100 ">
+    <div className="flex-1 bg-zinc-800 border-r-2 border-zinc-300 h-[100vh] max-w-xs overflow-y-scroll no-scrollbar">
+      <div className="text-white flex bg-zinc-800 sticky z-50 space-x-3 items-center p-3 h-20 border-b-2 border-white ">
         <Avatar
           className="cursor-pointer hover:opacity-75"
           src={user?.photoURL}

@@ -1,6 +1,6 @@
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import Image from "next/image";
+
 import { auth } from "../firebase";
 import moment from "moment/moment";
 
@@ -13,19 +13,19 @@ function Message({ user, message }) {
       <div
         className={
           TypeOfMessage == "Sender"
-            ? "text-lg w-fit p-3 m-2 pb-5 relative min-w-[5rem] min-h-[4rem]  rounded-lg text-right ml-auto bg-green-100"
-            : "text-lg w-fit p-3 m-2 pb-5 relative min-w-[5rem] min-h-[4rem] rounded-lg  bg-yellow-100 text-left"
+            ? "text-white shadow-xl text-lg w-fit p-3 m-2 pb-5 relative min-w-[5rem] min-h-[4rem] rounded-lg text-right ml-auto bg-teal-400"
+            : "shadow-xl text-lg w-fit p-3 m-2 pb-5 relative min-w-[5rem] min-h-[4rem] rounded-lg  bg-white text-left"
         }
       >
         {message.message}
-        <span className="text-gray-400 p-1 text-xs absolute bottom-0 text-center right-0">
+        <span className="text-zinc-600 p-1 text-[0.7rem] absolute bottom-0 text-center right-1">
           {message.timestamp ? moment(message.timestamp).format("LT") : "..."}
         </span>
         <div>
           {message.postImage && (
             <img
               src={message.postImage}
-              className="h-30 w-[20rem]"
+              className="h-30 w-[20rem] pb-3"
               layout="fill"
             />
           )}

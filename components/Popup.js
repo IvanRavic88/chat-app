@@ -58,7 +58,7 @@ export default function Popup() {
     <div>
       <div>
         <IconButton onClick={handleClickOpen}>
-          <ChatIcon className="text-green-600" />
+          <ChatIcon className="text-rose-500" />
         </IconButton>
       </div>
       <Dialog open={open} onClose={handleClose}>
