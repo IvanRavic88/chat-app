@@ -17,9 +17,13 @@ function Sidebar() {
   const openChatsWith = [];
   const [chatsSnapshot] = useCollection(userChatRef);
 
-  chatsSnapshot?.docs?.filter((chatsUsers) => {
-    chatsUsers.data().users.forEach((userEmail) => {
-      if (userEmail !== user.email) openChatsWith.push(userEmail);
+  // TODO: map and make array of object with id and userEmail
+
+  chatsSnapshot?.docs?.map((chat) => {
+    const chatId = chat.id;
+    chat.data().users.filter((userEmail) => {
+      if (userEmail !== user.email)
+        openChatsWith.push({ chatId: chatId, userEmail: userEmail });
     });
   });
 

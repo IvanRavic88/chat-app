@@ -1,34 +1,58 @@
 import SearchIcon from "@mui/icons-material/Search";
 import { useState } from "react";
-function SearchUser({ openChatsWith }) {
-  const [query, setQuery] = useState("");
+import router from "next/router";
 
-  const getChats = async (text) => {
-    if (!text) return;
-    try {
-    } catch (error) {
-      setQuery("");
+function SearchUser({ openChatsWith }) {
+  const [searchUser, setSearchUser] = useState({});
+  const [input, setInput] = useState("");
+
+  const handleSearchUser = (event) => {
+    event.preventDefault();
+    const searchQuery = event.target.value;
+    setInput(event.target.value);
+    const filteredUsers = [];
+    openChatsWith.filter(({ userEmail, chatId }) => {
+      if (userEmail.toLowerCase().includes(searchQuery.toLowerCase()))
+        filteredUsers.push({ userEmail: userEmail, chatId: chatId });
+    });
+
+    if (searchQuery === "") {
+      setSearchUser({});
+    } else {
+      setSearchUser(filteredUsers);
     }
   };
-
-  console.log(openChatsWith);
-
-  const search = (event) => {
-    event.preventDefault();
-
-    setQuery(event.target.value);
-    getChats(event.target.value);
+  const enterChat = (chatId) => {
+    router.push(`/chat/${chatId}`);
+    setSearchUser("");
+    setInput("");
   };
-
   return (
-    <div className="border rounded-full w-full hover:shadow-lg focus-within:shadow-lg max-w-md border-gray-200 px-5 py-1 items-center">
-      <SearchIcon className="text-red-600" />
-      <input
-        className="outline-none flex-1 ml-2"
-        placeholder="Search chats"
-        value={query}
-        onChange={search}
-      />
+    <div className="">
+      <div className="border rounded-full w-full hover:shadow-lg focus-within:shadow-lg max-w-md border-gray-200 px-5 py-1 items-center">
+        <SearchIcon className="text-red-600" />
+        <input
+          className="outline-none flex-1 ml-2"
+          placeholder="Search chats"
+          onChange={handleSearchUser}
+          value={input}
+        />
+      </div>
+      {searchUser.length ? (
+        <div className="pt-2 rounded-lg h-fit border-solid boc-shadow shadow-lg w-full">
+          {searchUser.slice(0, 5).map(({ userEmail, chatId }) => {
+            return (
+              <div
+                id={chatId}
+                onClick={() => enterChat(chatId)}
+                className="cursor-pointer rounded-lg w-[100%] flex items-center justify-center p-1 hover:bg-red-500 hover:text-white"
+              >
+                <p>{userEmail}</p>
+              </div>
+            );
+          })}
+        </div>
+      ) : null}
     </div>
   );
 }

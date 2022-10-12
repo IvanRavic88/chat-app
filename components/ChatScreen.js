@@ -4,7 +4,7 @@ import { useState, useRef, createRef } from "react";
 import { useRouter } from "next/router";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db, storage } from "../firebase";
-import { AttachFileOutlined } from "@mui/icons-material";
+import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import { useCollection } from "react-firebase-hooks/firestore";
 import {
   addDoc,
@@ -25,10 +25,10 @@ import EmojiPicker from "emoji-picker-react";
 import {
   getDownloadURL,
   ref,
-  uploadBytes,
   uploadBytesResumable,
   uploadString,
 } from "firebase/storage";
+import { signOut } from "firebase/auth";
 
 function ChatScreen({ messages, chat }) {
   const [imageToMessage, setImageToMessage] = useState(null);
@@ -39,13 +39,14 @@ function ChatScreen({ messages, chat }) {
   const [input, setInput] = useState("");
   const [user] = useAuthState(auth);
   const router = useRouter();
-  const [cursorPosition, setCursorPosition] = useState();
   const [messagesSnapshot] = useCollection(
     query(
       collection(db, "chats", `${router.query.id}`, "messages"),
       orderBy("timestamp", "asc")
     )
   );
+
+  //Insert emoji
   const emojiChoice = ({ emoji }) => {
     const ref = inputRef.current;
     ref.focus();
@@ -53,7 +54,11 @@ function ChatScreen({ messages, chat }) {
     const end = input.substring(ref.selectionStart);
     const text = start + emoji + end;
     setInput(text);
-    setCursorPosition(start.length + emoji.length);
+    // setCursorPosition(start.length + emoji.length);
+  };
+  //open window for selecting emoji
+  const handleViewEmoji = () => {
+    setShowEmoji(!showEmoji);
   };
 
   const [recipentSnapshot] = useCollection(
@@ -62,9 +67,7 @@ function ChatScreen({ messages, chat }) {
       where("email", "==", getRecipientEmail(chat.users, user))
     )
   );
-  const handleViewEmoji = () => {
-    setShowEmoji(!showEmoji);
-  };
+
   const showMessages = () => {
     if (messagesSnapshot) {
       return messagesSnapshot.docs.map((message) => (
@@ -98,6 +101,7 @@ function ChatScreen({ messages, chat }) {
     });
   };
 
+  // Sending Messeges with or without pictures
   const sendMessage = (e) => {
     e.preventDefault();
     setDoc(
@@ -148,9 +152,6 @@ function ChatScreen({ messages, chat }) {
     scrollToBottom();
   };
 
-  const recipientEmail = getRecipientEmail(chat.users, user);
-  const recipient = recipentSnapshot?.docs?.[0]?.data();
-
   const addImageToMessage = (e) => {
     const reader = new FileReader();
     if (e.target.files[0]) {
@@ -161,6 +162,10 @@ function ChatScreen({ messages, chat }) {
     };
   };
   const removeImage = () => setImageToMessage(null);
+
+  const recipientEmail = getRecipientEmail(chat.users, user);
+  const recipient = recipentSnapshot?.docs?.[0]?.data();
+
   return (
     <div className="relative">
       <header className="flex sticky top-0 bg-white p-3 items-center z-50 h-20 border-b-2 border-yellow-100">
@@ -170,7 +175,7 @@ function ChatScreen({ messages, chat }) {
           <Avatar>{recipientEmail[0]}</Avatar>
         )}
 
-        <div className="ml-2 flex-1">
+        <div className="ml-2 flex-1 ">
           <h3 className="mb-1">{recipientEmail}</h3>
           {recipentSnapshot ? (
             <p className="text-gray-500 text-xs">
@@ -185,6 +190,9 @@ function ChatScreen({ messages, chat }) {
             <p className="text-gray-500 text-xs">Loading last active...</p>
           )}
         </div>
+        <div onClick={() => signOut(auth)} className="cursor-pointer p-2">
+          <h2 className="text-red-600 hover:text-red-700">Logout</h2>
+        </div>
       </header>
       <div className="p-3 pb-20 pt-20 bg-yellow-50 min-h-[90vh]">
         {showMessages()}
@@ -194,7 +202,7 @@ function ChatScreen({ messages, chat }) {
 
       <form className="flex items-center sticky bottom-0 p-2 bg-white z-50 rounded-full">
         <IconButton onClick={handleViewEmoji}>
-          <InsertEmoticon className=" text-red-600 hover:text-red-400" />
+          <InsertEmoticon className=" text-red-600 hover:text-red-700" />
         </IconButton>
         <input
           ref={inputRef}
@@ -208,7 +216,12 @@ function ChatScreen({ messages, chat }) {
             <EmojiPicker onEmojiClick={emojiChoice} />
           </div>
         )}
-        <button hidden disabled={!input} type="submit" onClick={sendMessage}>
+        <button
+          hidden
+          disabled={!input & !imageToMessage}
+          type="submit"
+          onClick={sendMessage}
+        >
           Send message
         </button>
         {imageToMessage && (
@@ -221,7 +234,7 @@ function ChatScreen({ messages, chat }) {
           </div>
         )}
         <IconButton onClick={() => filePickerRef.current.click()}>
-          <AttachFileOutlined />
+          <AddAPhotoIcon className="text-red-600 hover:text-red-700 hover:scale-110 ease-in duration-500" />
           <input
             ref={filePickerRef}
             onChange={addImageToMessage}

@@ -68,6 +68,7 @@ export default function Popup() {
             Please enter an email address for the user you wish to chat with
           </DialogContentText>
           <TextField
+            error
             value={input}
             autoFocus
             margin="dense"
@@ -80,8 +81,12 @@ export default function Popup() {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={createChat}>Create Chat</Button>
+          <Button className="text-red-700" onClick={handleClose}>
+            Cancel
+          </Button>
+          <Button className="text-green-700" onClick={createChat}>
+            Create Chat
+          </Button>
         </DialogActions>
       </Dialog>
     </div>

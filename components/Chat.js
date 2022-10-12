@@ -25,7 +25,7 @@ function Chat({ id, users }) {
 
   return (
     <div
-      className="flex items-center cursor-pointer p-4 break-word hover:bg-yellow-200"
+      className="flex items-center cursor-pointer p-4 break-word hover:bg-red-500 hover:text-white"
       onClick={enterChat}
     >
       {recipient ? (

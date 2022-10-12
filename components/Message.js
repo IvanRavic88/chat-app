@@ -26,7 +26,6 @@ function Message({ user, message }) {
             <img
               src={message.postImage}
               className="h-30 w-[20rem]"
-              objectFit="cover"
               layout="fill"
             />
           )}
