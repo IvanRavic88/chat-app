@@ -47,7 +47,8 @@ function ChatScreen({ messages, chat }) {
   );
   useEffect(() => {
     scrollToBottom();
-  }, [messages]);
+  }, [messagesSnapshot]);
+
   //Insert emoji
   const emojiChoice = ({ emoji }) => {
     const ref = inputRef.current;
