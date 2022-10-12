@@ -45,7 +45,7 @@ function SearchUser({ openChatsWith }) {
               <div
                 key={chatId}
                 onClick={() => enterChat(chatId)}
-                className="cursor-pointer rounded-lg w-[100%] flex items-center justify-center p-1 hover:bg-red-500 hover:text-white"
+                className="cursor-pointer bg-white rounded-lg w-[100%] flex items-center mb-1 justify-center p-1 hover:bg-rose-500 hover:text-white"
               >
                 <p>{userEmail}</p>
               </div>
