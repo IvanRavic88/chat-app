@@ -1,4 +1,6 @@
 import Avatar from "@mui/material/Avatar";
+import CloseIcon from "@mui/icons-material/Close";
+import MenuIcon from "@mui/icons-material/Menu";
 import { IconButton } from "@mui/material";
 import { useState, useRef, createRef, useEffect } from "react";
 import { useRouter } from "next/router";
@@ -30,7 +32,8 @@ import {
 } from "firebase/storage";
 import { signOut } from "firebase/auth";
 
-function ChatScreen({ messages, chat }) {
+function ChatScreen({ messages, chat, showSideBar }) {
+  const [openMenu, setOpenMenu] = useState(false);
   const [imageToMessage, setImageToMessage] = useState(null);
   const inputRef = createRef();
   const [showEmoji, setShowEmoji] = useState(false);
@@ -48,6 +51,8 @@ function ChatScreen({ messages, chat }) {
   useEffect(() => {
     scrollToBottom();
   }, [messagesSnapshot]);
+
+  showSideBar(openMenu);
 
   //Insert emoji
   const emojiChoice = ({ emoji }) => {
@@ -193,7 +198,29 @@ function ChatScreen({ messages, chat }) {
             <p className="text-gray-500 text-xs">Loading last active...</p>
           )}
         </div>
-        <div onClick={() => signOut(auth)} className="cursor-pointer p-2">
+        {openMenu ? (
+          <div
+            onClick={() => {
+              setOpenMenu(!openMenu);
+            }}
+            className="md:hidden text-rose-500 hover:scale-110 hover:easy-in-out hover:duration-100"
+          >
+            <CloseIcon />
+          </div>
+        ) : (
+          <div
+            onClick={() => {
+              setOpenMenu(!openMenu);
+            }}
+            className="md:hidden text-rose-500 hover:scale-110 hover:easy-in-out hover:duration-100"
+          >
+            <MenuIcon />
+          </div>
+        )}
+        <div
+          onClick={() => signOut(auth)}
+          className="cursor-pointer p-2 hidden md:flex"
+        >
           <h2 className="text-rose-500 hover:scale-110">Logout</h2>
         </div>
       </header>
@@ -205,7 +232,7 @@ function ChatScreen({ messages, chat }) {
 
       <form className="flex items-center sticky bottom-0 p-2 bg-white z-50 rounded-full">
         <IconButton onClick={handleViewEmoji}>
-          <InsertEmoticon className=" text-teal-600 hover:text-teal-700 hover:scale-110" />
+          <InsertEmoticon className=" text-yellow-500 hover:text-yellow-600 hover:scale-110" />
         </IconButton>
         <input
           ref={inputRef}
@@ -241,7 +268,7 @@ function ChatScreen({ messages, chat }) {
           </div>
         )}
         <IconButton onClick={() => filePickerRef.current.click()}>
-          <AddAPhotoIcon className="text-teal-600 hover:text-teal-700 hover:scale-110 ease-in duration-500" />
+          <AddAPhotoIcon className="text-rose-500 hover:text-rose-600 hover:scale-110 ease-in duration-500" />
           <input
             ref={filePickerRef}
             onChange={addImageToMessage}

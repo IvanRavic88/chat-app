@@ -13,18 +13,41 @@ import {
 import { auth, db } from "../../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import getRecipientEmail from "../../utils/getRecipientEmail";
+import { useState, useEffect } from "react";
 
 function Chat({ chat, messages }) {
+  
+  const [showSidebar, setShowSidebar] = useState(false);
   const [user] = useAuthState(auth);
+
+  const handleShowSidebar = (showSidebar) => {
+    setShowSidebar(showSidebar);
+  };
+  //handle and show Sidebar if window width > 767px
+  const [isDesktop, setDesktop] = useState(window.innerWidth > 767);
+
+  const updateMedia = () => {
+    setDesktop(window.innerWidth > 767);
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", updateMedia);
+    return () => window.removeEventListener("resize", updateMedia);
+  });
 
   return (
     <div className="flex no-scrollbar">
       <Head>
         <title>Chat whit {getRecipientEmail(chat.users, user)}</title>
       </Head>
-      <Sidebar />
+
+      {(showSidebar || isDesktop) && <Sidebar />}
       <div className="no-scrollbar flex-1 overflow-scroll h-[100vh]">
-        <ChatScreen chat={chat} messages={messages}></ChatScreen>
+        <ChatScreen
+          chat={chat}
+          messages={messages}
+          showSideBar={handleShowSidebar}
+        />
       </div>
     </div>
   );
