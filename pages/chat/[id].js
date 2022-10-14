@@ -16,12 +16,11 @@ import getRecipientEmail from "../../utils/getRecipientEmail";
 import { useState, useEffect } from "react";
 
 function Chat({ chat, messages }) {
-  
   const [showSidebar, setShowSidebar] = useState(false);
   const [user] = useAuthState(auth);
 
-  const handleShowSidebar = (showSidebar) => {
-    setShowSidebar(showSidebar);
+  const handleShowSidebar = (showSideBar) => {
+    setShowSidebar(!showSideBar);
   };
   //handle and show Sidebar if window width > 767px
   const [isDesktop, setDesktop] = useState(window.innerWidth > 767);
@@ -41,7 +40,9 @@ function Chat({ chat, messages }) {
         <title>Chat whit {getRecipientEmail(chat.users, user)}</title>
       </Head>
 
-      {(showSidebar || isDesktop) && <Sidebar />}
+      {(showSidebar || isDesktop) && (
+        <Sidebar showSidebar={handleShowSidebar} />
+      )}
       <div className="no-scrollbar flex-1 overflow-scroll h-[100vh]">
         <ChatScreen
           chat={chat}

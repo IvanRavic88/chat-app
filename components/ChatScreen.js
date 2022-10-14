@@ -42,6 +42,7 @@ function ChatScreen({ messages, chat, showSideBar }) {
   const [input, setInput] = useState("");
   const [user] = useAuthState(auth);
   const router = useRouter();
+
   const [messagesSnapshot] = useCollection(
     query(
       collection(db, "chats", `${router.query.id}`, "messages"),
@@ -52,7 +53,8 @@ function ChatScreen({ messages, chat, showSideBar }) {
     scrollToBottom();
   }, [messagesSnapshot]);
 
-  showSideBar(openMenu);
+  // show or hide Sidebar (parent handle)
+  showSideBar(!openMenu);
 
   //Insert emoji
   const emojiChoice = ({ emoji }) => {
@@ -175,7 +177,7 @@ function ChatScreen({ messages, chat, showSideBar }) {
   const recipient = recipentSnapshot?.docs?.[0]?.data();
 
   return (
-    <div className="relative">
+    <div className="relative min-h-screen">
       <header className="flex sticky top-0 bg-zinc-800 p-3 items-center z-50 h-20 border-b-2 border-white">
         {recipient ? (
           <Avatar src={recipient?.photo} />
@@ -201,7 +203,7 @@ function ChatScreen({ messages, chat, showSideBar }) {
         {openMenu ? (
           <div
             onClick={() => {
-              setOpenMenu(!openMenu);
+              setOpenMenu(false);
             }}
             className="md:hidden text-rose-500 hover:scale-110 hover:easy-in-out hover:duration-100"
           >
@@ -210,7 +212,7 @@ function ChatScreen({ messages, chat, showSideBar }) {
         ) : (
           <div
             onClick={() => {
-              setOpenMenu(!openMenu);
+              setOpenMenu(true);
             }}
             className="md:hidden text-rose-500 hover:scale-110 hover:easy-in-out hover:duration-100"
           >

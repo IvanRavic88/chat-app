@@ -29,7 +29,7 @@ function SearchUser({ openChatsWith }) {
   };
   return (
     <div className="items-center justify-center w-full">
-      <div className="border bg-white rounded-full w-full focus-within:shadow-lg max-w-md border-gray-200 pl-3 py-1 items-center">
+      <div className="border bg-white rounded-full w-full focus-within:shadow-rose-500  focus-within:shadow-md max-w-md border-gray-200 pl-3 py-1 items-center">
         <SearchIcon className="text-rose-700" />
         <input
           className="outline-none flex-1 ml-2 "

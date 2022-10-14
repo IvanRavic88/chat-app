@@ -1,5 +1,5 @@
 import Chat from "./Chat";
-import { Avatar } from "@mui/material";
+import { Avatar, Button } from "@mui/material";
 import Search from "./Search";
 import { auth, db } from "../firebase";
 import { collection, query, where } from "firebase/firestore";
@@ -9,12 +9,13 @@ import { useCollection } from "react-firebase-hooks/firestore";
 import { signOut } from "firebase/auth";
 import Popup from "./Popup";
 
-function Sidebar() {
+function Sidebar({ showSidebar }) {
   const [user] = useAuthState(auth);
   const userChatRef = query(
     collection(db, "chats"),
     where("users", "array-contains", user.email)
   );
+
   const openChatsWith = [];
   const [chatsSnapshot] = useCollection(userChatRef);
 
@@ -47,6 +48,12 @@ function Sidebar() {
         {chatsSnapshot?.docs.map((chat) => (
           <Chat key={chat.id} id={chat.id} users={chat.data().users} />
         ))}
+        {/* <Button
+          className="text-white"
+          onClick={(prev) => showSidebar(!prev)}
+        >
+          Close
+        </Button> */}
       </div>
     </div>
   );
