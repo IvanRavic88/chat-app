@@ -1,8 +1,10 @@
 import Head from "next/head";
 import TextsmsIcon from "@mui/icons-material/Textsms";
 import { Button } from "@mui/material";
-import { auth, provider } from "../firebase";
+import { auth, provider } from "../utils/firebase";
 import { signInWithPopup } from "firebase/auth";
+import Image from "next/image";
+import { FcGoogle } from "react-icons/fc";
 
 function Login() {
   const signIn = () => {
@@ -10,23 +12,33 @@ function Login() {
   };
 
   return (
-    <div className="grid place-items-center h-[100vh] bg-slate-50">
+    <div className="grid relative place-items-center h-[100vh] bg-zinc-900/90">
+      <img
+        src="/login-picture.jpg"
+        className="absolute w-full h-full object-cover mix-blend-overlay"
+        alt="Young people next to a laptop."
+      />
       <Head>
         <title>Login</title>
       </Head>
-      <div className="p-20 flex flex-col items-center bg-white rounded-sm shadow-md ">
-        <h1 className="p-2 pb-8 text-blue-900 text-3xl font-extrabold">
+      <div className="p-20 flex flex-col items-center bg-white rounded-xl shadow-xl ">
+        <h1 className="p-2 pb-8 text-rose-700 text-4xl font-extrabold">
           Chat-App
         </h1>
+        <p className="text-rose-700 text-base pb-3">Welcome</p>
         <TextsmsIcon
           fontSize="ingerit"
-          className="text-blue-600 mb-12 text-8xl"
+          className="text-rose-700 mb-12 text-8xl"
         />
+
         <Button
-          className="text-gray-500 hover:text-white"
+          className=" hover:text-white"
           onClick={signIn}
           variant="contained"
+          color="error"
         >
+          {" "}
+          <FcGoogle className="w-8 h-8 pr-2" />
           Sign in with Google
         </Button>
       </div>

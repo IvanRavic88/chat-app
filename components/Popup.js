@@ -10,7 +10,7 @@ import ChatIcon from "@mui/icons-material/Chat";
 import { IconButton } from "@mui/material";
 import * as EmailValidator from "email-validator";
 import { collection, addDoc, query, where } from "firebase/firestore";
-import { auth, db } from "../firebase";
+import { auth, db } from "../utils/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
 

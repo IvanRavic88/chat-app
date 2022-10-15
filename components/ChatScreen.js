@@ -5,7 +5,7 @@ import { IconButton } from "@mui/material";
 import { useState, useRef, createRef, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth, db, storage } from "../firebase";
+import { auth, db, storage } from "../utils/firebase";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import { useCollection } from "react-firebase-hooks/firestore";
 import {
@@ -201,23 +201,23 @@ function ChatScreen({ messages, chat, showSideBar }) {
           )}
         </div>
         {openMenu ? (
-          <div
+          <IconButton
             onClick={() => {
               setOpenMenu(false);
             }}
             className="md:hidden text-rose-500 hover:scale-110 hover:easy-in-out hover:duration-100"
           >
             <CloseIcon />
-          </div>
+          </IconButton>
         ) : (
-          <div
+          <IconButton
             onClick={() => {
               setOpenMenu(true);
             }}
-            className="md:hidden text-rose-500 hover:scale-110 hover:easy-in-out hover:duration-100"
+            className=" md:hidden text-rose-500 hover:scale-110 hover:easy-in-out hover:duration-100"
           >
             <MenuIcon />
-          </div>
+          </IconButton>
         )}
         <div
           onClick={() => signOut(auth)}

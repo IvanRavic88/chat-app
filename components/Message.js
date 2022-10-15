@@ -1,7 +1,7 @@
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 
-import { auth } from "../firebase";
+import { auth } from "../utils/firebase";
 import moment from "moment/moment";
 
 function Message({ user, message }) {

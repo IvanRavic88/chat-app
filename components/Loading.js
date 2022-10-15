@@ -1,13 +1,13 @@
 import React from "react";
-import TextsmsIcon from "@mui/icons-material/Textsms";
+
 function Loading() {
   return (
     <center className="grid place-items-center h-[100vh]">
       <div>
-        <TextsmsIcon
-          fontSize="ingerit"
-          className="text-blue-600 mb-12 text-8xl"
-        />
+        <svg
+          className="animate-spin h-5 w-5 mr-3 ..."
+          viewBox="0 0 24 24"
+        ></svg>
       </div>
     </center>
   );

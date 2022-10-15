@@ -1,7 +1,7 @@
 import Chat from "./Chat";
 import { Avatar, Button } from "@mui/material";
 import Search from "./Search";
-import { auth, db } from "../firebase";
+import { auth, db } from "../utils/firebase";
 import { collection, query, where } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";

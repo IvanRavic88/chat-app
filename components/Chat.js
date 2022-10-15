@@ -4,7 +4,7 @@ import { collection, where, query } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
 import getRecipientEmail from "../utils/getRecipientEmail";
-import { auth, db } from "../firebase";
+import { auth, db } from "../utils/firebase";
 
 function Chat({ id, users }) {
   const router = useRouter();
