@@ -175,7 +175,9 @@ function ChatScreen({ messages, chat, showSideBar }) {
 
   const recipientEmail = getRecipientEmail(chat.users, user);
   const recipient = recipentSnapshot?.docs?.[0]?.data();
-
+  const logOut = (e) => {
+    signOut(auth);
+  };
   return (
     <div className="relative min-h-screen">
       <header className="flex sticky top-0 bg-zinc-800 p-3 items-center z-50 h-20 border-b-2 border-white">
@@ -202,27 +204,24 @@ function ChatScreen({ messages, chat, showSideBar }) {
         </div>
         {openMenu ? (
           <IconButton
+            className="hide"
             onClick={() => {
               setOpenMenu(false);
             }}
-            className="md:hidden text-rose-500 hover:scale-110 hover:easy-in-out hover:duration-100"
           >
-            <CloseIcon />
+            <CloseIcon className=" text-rose-500 hover:scale-110 hover:easy-in-out hover:duration-100" />
           </IconButton>
         ) : (
           <IconButton
+            className="hide"
             onClick={() => {
               setOpenMenu(true);
             }}
-            className=" md:hidden text-rose-500 hover:scale-110 hover:easy-in-out hover:duration-100"
           >
-            <MenuIcon />
+            <MenuIcon className=" text-rose-500 hover:scale-110 hover:easy-in-out hover:duration-100" />
           </IconButton>
         )}
-        <div
-          onClick={() => signOut(auth)}
-          className="cursor-pointer p-2 hidden md:flex"
-        >
+        <div onClick={logOut} className="cursor-pointer p-2 hidden md:flex">
           <h2 className="text-rose-500 hover:scale-110">Logout</h2>
         </div>
       </header>

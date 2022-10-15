@@ -9,7 +9,7 @@ import { useCollection } from "react-firebase-hooks/firestore";
 import { signOut } from "firebase/auth";
 import Popup from "./Popup";
 
-function Sidebar({ showSidebar }) {
+function Sidebar() {
   const [user] = useAuthState(auth);
   const userChatRef = query(
     collection(db, "chats"),
@@ -48,12 +48,6 @@ function Sidebar({ showSidebar }) {
         {chatsSnapshot?.docs.map((chat) => (
           <Chat key={chat.id} id={chat.id} users={chat.data().users} />
         ))}
-        {/* <Button
-          className="text-white"
-          onClick={(prev) => showSidebar(!prev)}
-        >
-          Close
-        </Button> */}
       </div>
     </div>
   );

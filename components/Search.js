@@ -28,7 +28,7 @@ function SearchUser({ openChatsWith }) {
     setInput("");
   };
   return (
-    <div className="items-center justify-center w-full">
+    <div className="items-center justify-center w-full relative">
       <div className="border bg-white rounded-full w-full focus-within:shadow-rose-500  focus-within:shadow-md max-w-md border-gray-200 pl-3 py-1 items-center">
         <SearchIcon className="text-rose-700" />
         <input
@@ -39,13 +39,13 @@ function SearchUser({ openChatsWith }) {
         />
       </div>
       {searchUser.length ? (
-        <div className="pt-2 rounded-lg h-fit border-solid boc-shadow shadow-lg w-full">
+        <div className="border-2 border-white absolute z-50 bg-zinc-800 mt-2 p-2 rounded-lg h-fit border-solid boc-shadow shadow-lg w-full">
           {searchUser.slice(0, 5).map(({ userEmail, chatId }) => {
             return (
               <div
                 key={chatId}
                 onClick={() => enterChat(chatId)}
-                className="cursor-pointer bg-white rounded-lg w-[100%] flex items-center mb-1 justify-center p-1 hover:bg-rose-500 hover:text-white"
+                className="white cursor-pointer bg-zinc-800 border-rose-500 border-b-2 text-white rounded-lg w-[100%] flex items-center mb-1 justify-center p-1 hover:bg-rose-500 hover:text-white"
               >
                 <p>{userEmail}</p>
               </div>

@@ -40,9 +40,7 @@ function Chat({ chat, messages }) {
         <title>Chat whit {getRecipientEmail(chat.users, user)}</title>
       </Head>
 
-      {(showSidebar || isDesktop) && (
-        <Sidebar showSidebar={handleShowSidebar} />
-      )}
+      {(showSidebar || isDesktop) && <Sidebar />}
       <div className="no-scrollbar flex-1 overflow-scroll h-[100vh]">
         <ChatScreen
           chat={chat}
