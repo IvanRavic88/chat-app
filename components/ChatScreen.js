@@ -23,14 +23,14 @@ import Message from "./Message";
 import { InsertEmoticon } from "@mui/icons-material";
 import getRecipientEmail from "../utils/getRecipientEmail";
 import TimeAgo from "timeago-react";
-import dynamic from "next/dynamic";
+// import dynamic from "next/dynamic";
 
-const Picker = dynamic(
-  () => {
-    return import("emoji-picker-react");
-  },
-  { ssr: false }
-);
+// const Picker = dynamic(
+//   () => {
+//     return import("emoji-picker-react");
+//   },
+//   { ssr: false }
+// );
 import {
   getDownloadURL,
   ref,
@@ -251,7 +251,7 @@ function ChatScreen({ messages, chat, showSideBar }) {
         />{" "}
         {showEmoji && (
           <div className="absolute bottom-[5rem] z-50">
-            <Picker onEmojiClick={emojiChoice} />
+            {/* <Picker onEmojiClick={emojiChoice} /> */}
           </div>
         )}
         <button
