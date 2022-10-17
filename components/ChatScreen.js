@@ -23,7 +23,14 @@ import Message from "./Message";
 import { InsertEmoticon } from "@mui/icons-material";
 import getRecipientEmail from "../utils/getRecipientEmail";
 import TimeAgo from "timeago-react";
-import EmojiPicker from "emoji-picker-react";
+import dynamic from "next/dynamic";
+
+const Picker = dynamic(
+  () => {
+    return import("emoji-picker-react");
+  },
+  { ssr: false }
+);
 import {
   getDownloadURL,
   ref,
@@ -182,9 +189,9 @@ function ChatScreen({ messages, chat, showSideBar }) {
     <div className="relative min-h-screen">
       <header className="flex sticky top-0 bg-zinc-800 p-3 items-center z-50 h-20 border-b-2 border-white">
         {recipient ? (
-          <Avatar src={recipient?.photo} />
+          <Avatar src={recipient?.photo} alt="User photo" />
         ) : (
-          <Avatar>{recipientEmail[0]}</Avatar>
+          <Avatar alt="User photo">{recipientEmail[0]}</Avatar>
         )}
 
         <div className="ml-2 flex-1 ">
@@ -244,7 +251,7 @@ function ChatScreen({ messages, chat, showSideBar }) {
         />{" "}
         {showEmoji && (
           <div className="absolute bottom-[5rem] z-50">
-            <EmojiPicker onEmojiClick={emojiChoice} />
+            <Picker onEmojiClick={emojiChoice} />
           </div>
         )}
         <button

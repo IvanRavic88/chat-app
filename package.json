@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "analyze": "cross-env ANALYZE=true next build",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -20,6 +21,7 @@
     "firebase": "^9.12.1",
     "moment": "^2.29.4",
     "next": "12.3.1",
+    "postcss-import": "^15.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-firebase-hooks": "^5.0.3",
@@ -27,9 +29,12 @@
     "timeago-react": "^3.0.5"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^12.3.1",
+    "cross-env": "^7.0.3",
     "eslint": "8.24.0",
     "eslint-config-next": "12.3.1",
     "postcss": "^8.4.17",
-    "tailwindcss": "^3.1.8"
+    "tailwindcss": "^3.1.8",
+    "webpack-bundle-analyzer": "^4.6.1"
   }
 }
