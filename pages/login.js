@@ -1,9 +1,9 @@
 import Head from "next/head";
 import TextsmsIcon from "@mui/icons-material/Textsms";
-import { Button } from "@mui/material";
+import Button from "@mui/material/Button";
 import { auth, provider } from "../utils/firebase";
 import { signInWithPopup } from "firebase/auth";
-import Image from "next/image";
+
 import { FcGoogle } from "react-icons/fc";
 
 function Login() {

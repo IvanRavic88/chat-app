@@ -1,5 +1,3 @@
-import React from "react";
-
 function Loading() {
   return (
     <center className="grid place-items-center h-[100vh]">

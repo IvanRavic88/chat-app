@@ -1,5 +1,5 @@
 import Chat from "./Chat";
-import { Avatar, Button } from "@mui/material";
+import Avatar from "@mui/material/Avatar";
 import Search from "./Search";
 import { auth, db } from "../utils/firebase";
 import { collection, query, where } from "firebase/firestore";

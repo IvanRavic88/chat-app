@@ -7,7 +7,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import ChatIcon from "@mui/icons-material/Chat";
-import { IconButton } from "@mui/material";
+import IconButton from "@mui/material/IconButton";
 import * as EmailValidator from "email-validator";
 import { collection, addDoc, query, where } from "firebase/firestore";
 import { auth, db } from "../utils/firebase";

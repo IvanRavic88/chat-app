@@ -1,7 +1,7 @@
 import Avatar from "@mui/material/Avatar";
 import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
-import { IconButton } from "@mui/material";
+import IconButton from "@mui/material/IconButton";
 import { useState, useRef, createRef, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -20,7 +20,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import Message from "./Message";
-import { InsertEmoticon } from "@mui/icons-material";
+import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
 import getRecipientEmail from "../utils/getRecipientEmail";
 import TimeAgo from "timeago-react";
 // import dynamic from "next/dynamic";
@@ -240,7 +240,7 @@ function ChatScreen({ messages, chat, showSideBar }) {
 
       <form className="flex items-center sticky bottom-0 p-2 bg-white z-50 rounded-full">
         <IconButton onClick={handleViewEmoji}>
-          <InsertEmoticon className=" text-yellow-500 hover:text-yellow-600 hover:scale-110" />
+          <InsertEmoticonIcon className=" text-yellow-500 hover:text-yellow-600 hover:scale-110" />
         </IconButton>
         <input
           ref={inputRef}

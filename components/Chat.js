@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { Avatar } from "@mui/material";
+import Avatar from "@mui/material/Avatar";
 import { collection, where, query } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
