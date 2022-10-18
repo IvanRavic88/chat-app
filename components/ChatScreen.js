@@ -23,14 +23,14 @@ import Message from "./Message";
 import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
 import getRecipientEmail from "../utils/getRecipientEmail";
 import TimeAgo from "timeago-react";
-// import dynamic from "next/dynamic";
+import dynamic from "next/dynamic";
 
-// const Picker = dynamic(
-//   () => {
-//     return import("emoji-picker-react");
-//   },
-//   { ssr: false }
-// );
+const Picker = dynamic(
+  () => {
+    return import("emoji-picker-react");
+  },
+  { ssr: false }
+);
 import {
   getDownloadURL,
   ref,
@@ -38,6 +38,7 @@ import {
   uploadString,
 } from "firebase/storage";
 import { signOut } from "firebase/auth";
+import Image from "next/image";
 
 function ChatScreen({ messages, chat, showSideBar }) {
   const [openMenu, setOpenMenu] = useState(false);
@@ -251,7 +252,7 @@ function ChatScreen({ messages, chat, showSideBar }) {
         />{" "}
         {showEmoji && (
           <div className="absolute bottom-[5rem] z-50">
-            {/* <Picker onEmojiClick={emojiChoice} /> */}
+            <Picker onEmojiClick={emojiChoice} />
           </div>
         )}
         <button
@@ -267,8 +268,10 @@ function ChatScreen({ messages, chat, showSideBar }) {
             onClick={removeImage}
             className="flex flex-col filter hover: brightness-110 transition duration-150 transform hover:scale-105 cursor-pointer"
           >
-            <img
-              className="h-10 object-contain"
+            <Image
+              width={25}
+              height={25}
+              className="object-contain"
               src={imageToMessage}
               alt="Message from user"
             />

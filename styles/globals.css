@@ -17,4 +17,7 @@
   .hide {
     @apply md:hidden !important;
   }
+  .button-popup {
+    @apply text-rose-600 !important;
+  }
 }

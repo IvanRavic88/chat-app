@@ -1,5 +1,5 @@
 import { useAuthState } from "react-firebase-hooks/auth";
-
+import Image from "next/image";
 import { auth } from "../utils/firebase";
 import moment from "moment/moment";
 
@@ -21,11 +21,14 @@ function Message({ user, message }) {
           {message.timestamp ? moment(message.timestamp).format("LT") : "..."}
         </span>
         <div>
-          {message.postImage && (
-            <img
+          {message?.postImage && (
+            <Image
+              loader={() => message.postImage}
+              unoptimized={true}
+              width={350}
+              height={250}
+              layout="intrinsic"
               src={message.postImage}
-              className="h-30 w-[20rem] pb-3"
-              layout="fill"
             />
           )}
         </div>

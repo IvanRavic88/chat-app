@@ -3,7 +3,7 @@ import TextsmsIcon from "@mui/icons-material/Textsms";
 import Button from "@mui/material/Button";
 import { auth, provider } from "../utils/firebase";
 import { signInWithPopup } from "firebase/auth";
-
+import Image from "next/image";
 import { FcGoogle } from "react-icons/fc";
 
 function Login() {
@@ -13,8 +13,9 @@ function Login() {
 
   return (
     <div className="grid relative place-items-center h-[100vh] bg-zinc-900/90">
-      <img
+      <Image
         src="/login-picture.jpg"
+        layout="fill"
         className="absolute w-full h-full object-cover mix-blend-overlay"
         alt="Young people next to a laptop."
       />

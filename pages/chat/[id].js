@@ -19,8 +19,11 @@ function Chat({ chat, messages }) {
   const [showSidebar, setShowSidebar] = useState(false);
   const [user] = useAuthState(auth);
 
+  //problem with rendering becuse of parent-chaild function
   const handleShowSidebar = (showSideBar) => {
-    setShowSidebar(!showSideBar);
+    useEffect(() => {
+      setShowSidebar(!showSideBar);
+    }, [showSideBar]);
   };
   //handle and show Sidebar if window width > 767px
   const [isDesktop, setDesktop] = useState(window.innerWidth > 767);

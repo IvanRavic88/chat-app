@@ -62,13 +62,20 @@ export default function Popup() {
         </IconButton>
       </div>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Open New Chat Room</DialogTitle>
+        <DialogTitle className="text-rose-500">Open New Chat Room</DialogTitle>
         <DialogContent>
           <DialogContentText>
             Please enter an email address for the user you wish to chat with
           </DialogContentText>
           <TextField
-            error
+            InputLabelProps={{
+              style: { color: "#f43f5e" },
+            }}
+            sx={{
+              "& .MuiInput-underline:after": {
+                borderBottomColor: "#f43f5e",
+              },
+            }}
             value={input}
             autoFocus
             margin="dense"
@@ -81,10 +88,10 @@ export default function Popup() {
           />
         </DialogContent>
         <DialogActions>
-          <Button className="text-red-700" onClick={handleClose}>
+          <Button className="button-popup" onClick={handleClose}>
             Cancel
           </Button>
-          <Button className="text-green-700" onClick={createChat}>
+          <Button className="button-popup" onClick={createChat}>
             Create Chat
           </Button>
         </DialogActions>
