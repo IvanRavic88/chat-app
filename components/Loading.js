@@ -1,4 +1,4 @@
-function Loading() {
+const Loading = () => {
   return (
     <center className="grid place-items-center h-[100vh]">
       <div>
@@ -9,6 +9,6 @@ function Loading() {
       </div>
     </center>
   );
-}
+};
 
 export default Loading;

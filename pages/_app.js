@@ -5,6 +5,7 @@ import Login from "./login";
 import Loading from "../components/Loading";
 import { useEffect } from "react";
 import { serverTimestamp, doc, setDoc } from "firebase/firestore";
+import { StateContext } from "../contex/StateContex";
 
 function MyApp({ Component, pageProps }) {
   const [user, loading] = useAuthState(auth);
@@ -26,7 +27,10 @@ function MyApp({ Component, pageProps }) {
   if (loading) return <Loading />;
   if (!user) return <Login />;
 
-  return <Component {...pageProps} />;
+  return (
+    <StateContext>
+      <Component {...pageProps} />
+    </StateContext>
+  );
 }
-
 export default MyApp;

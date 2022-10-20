@@ -2,7 +2,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { useState } from "react";
 import router from "next/router";
 
-function SearchUser({ openChatsWith }) {
+const SearchUser = ({ openChatsWith }) => {
   const [searchUser, setSearchUser] = useState({});
   const [input, setInput] = useState("");
 
@@ -27,9 +27,10 @@ function SearchUser({ openChatsWith }) {
     setSearchUser("");
     setInput("");
   };
+
   return (
     <div className="items-center justify-center w-full relative">
-      <div className="border bg-white rounded-full w-full focus-within:shadow-rose-500  focus-within:shadow-md max-w-md border-gray-200 pl-3 py-1 items-center">
+      <div className="border bg-white rounded-full w-full focus-within:shadow-amber-500  focus-within:shadow-md max-w-md border-gray-200 pl-3 py-1 items-center">
         <SearchIcon className="text-rose-700" />
         <input
           className="outline-none flex-1 ml-2 "
@@ -55,6 +56,6 @@ function SearchUser({ openChatsWith }) {
       ) : null}
     </div>
   );
-}
+};
 
 export default SearchUser;

@@ -14,7 +14,7 @@ import { auth, db } from "../utils/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
 
-export default function Popup() {
+const Popup = () => {
   const [user] = useAuthState(auth);
 
   const [input, setInput] = useState("");
@@ -58,22 +58,22 @@ export default function Popup() {
     <div>
       <div>
         <IconButton onClick={handleClickOpen}>
-          <ChatIcon className="text-rose-500" />
+          <ChatIcon className="text-red-500" />
         </IconButton>
       </div>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle className="text-rose-500">Open New Chat Room</DialogTitle>
+        <DialogTitle className="text-red-500">Open New Chat Room</DialogTitle>
         <DialogContent>
           <DialogContentText>
             Please enter an email address for the user you wish to chat with
           </DialogContentText>
           <TextField
             InputLabelProps={{
-              style: { color: "#f43f5e" },
+              style: { color: "#f59e0b" },
             }}
             sx={{
               "& .MuiInput-underline:after": {
-                borderBottomColor: "#f43f5e",
+                borderBottomColor: "#f59e0b",
               },
             }}
             value={input}
@@ -98,4 +98,5 @@ export default function Popup() {
       </Dialog>
     </div>
   );
-}
+};
+export default Popup;

@@ -24,7 +24,6 @@ import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
 import getRecipientEmail from "../utils/getRecipientEmail";
 import TimeAgo from "timeago-react";
 import dynamic from "next/dynamic";
-
 const Picker = dynamic(
   () => {
     return import("emoji-picker-react");
@@ -39,9 +38,10 @@ import {
 } from "firebase/storage";
 import { signOut } from "firebase/auth";
 import Image from "next/image";
+import { useStateContext } from "../contex/StateContex";
 
-function ChatScreen({ messages, chat, showSideBar }) {
-  const [openMenu, setOpenMenu] = useState(false);
+const ChatScreen = ({ messages, chat }) => {
+  const { showSidebar, handleShowSidebar } = useStateContext();
   const [imageToMessage, setImageToMessage] = useState(null);
   const inputRef = createRef();
   const [showEmoji, setShowEmoji] = useState(false);
@@ -60,9 +60,6 @@ function ChatScreen({ messages, chat, showSideBar }) {
   useEffect(() => {
     scrollToBottom();
   }, [messagesSnapshot]);
-
-  // show or hide Sidebar (parent handle)
-  showSideBar(!openMenu);
 
   //Insert emoji
   const emojiChoice = ({ emoji }) => {
@@ -183,12 +180,12 @@ function ChatScreen({ messages, chat, showSideBar }) {
 
   const recipientEmail = getRecipientEmail(chat.users, user);
   const recipient = recipentSnapshot?.docs?.[0]?.data();
-  const logOut = (e) => {
+  const logOut = () => {
     signOut(auth);
   };
   return (
-    <div className="relative min-h-screen">
-      <header className="flex sticky top-0 bg-zinc-800 p-3 items-center z-50 h-20 border-b-2 border-white">
+    <div className="relative min-h-screen no-scroll">
+      <header className="flex sticky top-0 bg-zinc-900 p-3 items-center z-50 h-20 ">
         {recipient ? (
           <Avatar src={recipient?.photo} alt="User photo" />
         ) : (
@@ -210,27 +207,27 @@ function ChatScreen({ messages, chat, showSideBar }) {
             <p className="text-gray-500 text-xs">Loading last active...</p>
           )}
         </div>
-        {openMenu ? (
+        {showSidebar ? (
           <IconButton
             className="hide"
             onClick={() => {
-              setOpenMenu(false);
+              handleShowSidebar(false);
             }}
           >
-            <CloseIcon className=" text-rose-500 hover:scale-110 hover:easy-in-out hover:duration-100" />
+            <CloseIcon className=" text-red-500 hover:scale-110 hover:easy-in-out hover:duration-100" />
           </IconButton>
         ) : (
           <IconButton
             className="hide"
             onClick={() => {
-              setOpenMenu(true);
+              handleShowSidebar(true);
             }}
           >
-            <MenuIcon className=" text-rose-500 hover:scale-110 hover:easy-in-out hover:duration-100" />
+            <MenuIcon className=" text-red-500 hover:scale-110 hover:easy-in-out hover:duration-100" />
           </IconButton>
         )}
         <div onClick={logOut} className="cursor-pointer p-2 hidden md:flex">
-          <h2 className="text-rose-500 hover:scale-110">Logout</h2>
+          <h2 className="text-red-500 hover:scale-110">Logout</h2>
         </div>
       </header>
       <div className="p-3 pb-20 pt-20 bg-gray-50 min-h-[90vh]">
@@ -279,7 +276,7 @@ function ChatScreen({ messages, chat, showSideBar }) {
           </div>
         )}
         <IconButton onClick={() => filePickerRef.current.click()}>
-          <AddAPhotoIcon className="text-rose-500 hover:text-rose-600 hover:scale-110 ease-in duration-500" />
+          <AddAPhotoIcon className="text-red-500 hover:text-red-600 hover:scale-110 ease-in duration-500" />
           <input
             ref={filePickerRef}
             onChange={addImageToMessage}
@@ -290,6 +287,6 @@ function ChatScreen({ messages, chat, showSideBar }) {
       </form>
     </div>
   );
-}
+};
 
 export default ChatScreen;

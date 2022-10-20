@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Sidebar from "../components/Sidebar";
 
-export default function Home() {
+const Home = () => {
   return (
     <div className="no-scrollbar">
       <Head>
@@ -12,4 +12,5 @@ export default function Home() {
       <Sidebar />
     </div>
   );
-}
+};
+export default Home;

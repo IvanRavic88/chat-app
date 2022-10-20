@@ -22,7 +22,7 @@ function Login() {
       <Head>
         <title>Login</title>
       </Head>
-      <div className="p-20 flex flex-col items-center bg-white rounded-xl shadow-xl ">
+      <div className="flex flex-col items-center bg-white rounded-xl shadow-xl p-16">
         <h1 className="p-2 pb-8 text-rose-700 text-4xl font-extrabold">
           Chat-App
         </h1>
@@ -33,10 +33,9 @@ function Login() {
         />
 
         <Button
-          className=" hover:text-white"
+          className=" hover:text-white btn"
           onClick={signIn}
           variant="contained"
-          color="error"
         >
           {" "}
           <FcGoogle className="w-8 h-8 pr-2" />

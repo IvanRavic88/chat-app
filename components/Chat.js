@@ -5,8 +5,10 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
 import getRecipientEmail from "../utils/getRecipientEmail";
 import { auth, db } from "../utils/firebase";
+import { useStateContext } from "../contex/StateContex";
 
-function Chat({ id, users }) {
+const Chat = ({ id, users }) => {
+  const { handleShowSidebar } = useStateContext();
   const router = useRouter();
   const [user] = useAuthState(auth);
   const recipientEmail = getRecipientEmail(users, user);
@@ -21,11 +23,12 @@ function Chat({ id, users }) {
 
   const enterChat = () => {
     router.push(`/chat/${id}`);
+    handleShowSidebar(false);
   };
 
   return (
     <div
-      className="m-2 bg-white rounded-xl flex items-center cursor-pointer p-3 break-word hover:bg-rose-500 hover:shadow-xl hover:text-white  border-b-4 border-solid border-teal-500"
+      className="m-2 bg-white rounded-xl flex items-center cursor-pointer p-3 break-word hover:bg-red-500 hover:shadow-xl hover:text-white  border-b-4 border-solid border-red-500"
       onClick={enterChat}
     >
       {recipient ? (
@@ -36,6 +39,6 @@ function Chat({ id, users }) {
       <p>{recipientEmail}</p>
     </div>
   );
-}
+};
 
 export default Chat;

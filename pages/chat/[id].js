@@ -1,7 +1,6 @@
 import Head from "next/head";
 import Sidebar from "../../components/Sidebar";
 import ChatScreen from "../../components/ChatScreen";
-
 import {
   collection,
   doc,
@@ -14,28 +13,11 @@ import { auth, db } from "../../utils/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import getRecipientEmail from "../../utils/getRecipientEmail";
 import { useState, useEffect } from "react";
+import { useStateContext } from "../../contex/StateContex";
 
-function Chat({ chat, messages }) {
-  const [showSidebar, setShowSidebar] = useState(false);
+const Chat = ({ chat, messages }) => {
+  const { showSidebar, isDesktop } = useStateContext();
   const [user] = useAuthState(auth);
-
-  //problem with rendering becuse of parent-chaild function
-  const handleShowSidebar = (showSideBar) => {
-    useEffect(() => {
-      setShowSidebar(!showSideBar);
-    }, [showSideBar]);
-  };
-  //handle and show Sidebar if window width > 767px
-  const [isDesktop, setDesktop] = useState(window.innerWidth > 767);
-
-  const updateMedia = () => {
-    setDesktop(window.innerWidth > 767);
-  };
-
-  useEffect(() => {
-    window.addEventListener("resize", updateMedia);
-    return () => window.removeEventListener("resize", updateMedia);
-  });
 
   return (
     <div className="flex no-scrollbar">
@@ -45,15 +27,11 @@ function Chat({ chat, messages }) {
 
       {(showSidebar || isDesktop) && <Sidebar />}
       <div className="no-scrollbar flex-1 overflow-scroll h-[100vh]">
-        <ChatScreen
-          chat={chat}
-          messages={messages}
-          showSideBar={handleShowSidebar}
-        />
+        <ChatScreen chat={chat} messages={messages} />
       </div>
     </div>
   );
-}
+};
 
 export default Chat;
 

@@ -5,11 +5,13 @@ import { auth, db } from "../utils/firebase";
 import { collection, query, where } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
-
 import { signOut } from "firebase/auth";
 import Popup from "./Popup";
+import { useStateContext } from "../contex/StateContex";
+import Button from "@mui/material/Button";
 
-function Sidebar() {
+const Sidebar = () => {
+  const { handleShowSidebar, showSidebar } = useStateContext();
   const [user] = useAuthState(auth);
   const userChatRef = query(
     collection(db, "chats"),
@@ -18,8 +20,6 @@ function Sidebar() {
 
   const openChatsWith = [];
   const [chatsSnapshot] = useCollection(userChatRef);
-
-  // TODO: map and make array of object with id and userEmail
 
   chatsSnapshot?.docs?.map((chat) => {
     const chatId = chat.id;
@@ -31,8 +31,8 @@ function Sidebar() {
 
   return (
     <div className="relative text-sm md:text-base">
-      <div className=" z-[100] absolute md:relative flex-1 bg-zinc-800  h-[100vh] max-w-xs  overflow-y-scroll no-scrollbar">
-        <div className="text-white flex bg-zinc-800 sticky z-50 space-x-3 items-center p-3 h-20 border-2 border-rose-500 ">
+      <div className=" z-[100] absolute md:relative flex-1 bg-zinc-900  h-[100vh] max-w-xs  overflow-y-scroll no-scrollbar">
+        <div className="text-white flex bg-zinc-900 sticky z-50 space-x-3 items-center p-3 h-20 border-2 border-red-500 ">
           <Avatar
             className="cursor-pointer hover:opacity-75"
             src={user?.photoURL}
@@ -48,9 +48,19 @@ function Sidebar() {
         {chatsSnapshot?.docs.map((chat) => (
           <Chat key={chat.id} id={chat.id} users={chat.data().users} />
         ))}
+        {showSidebar && (
+          <div className="m-2">
+            <Button
+              className="btn-sidebar"
+              onClick={() => handleShowSidebar(false)}
+            >
+              Close
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   );
-}
+};
 
 export default Sidebar;
