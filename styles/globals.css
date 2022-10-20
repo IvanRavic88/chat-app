@@ -17,8 +17,14 @@
   .hide {
     @apply md:hidden !important;
   }
-  .button-popup {
+  .popup-main-text {
+    @apply text-zinc-900 !important;
+  }
+  .button-popup-chat {
     @apply text-red-600 !important;
+  }
+  .button-popup-cancel {
+    @apply text-stone-600 !important;
   }
   .btn {
     @apply bg-red-500 hover:bg-red-600 !important;

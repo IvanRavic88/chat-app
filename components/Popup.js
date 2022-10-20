@@ -64,16 +64,16 @@ const Popup = () => {
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle className="text-red-500">Open New Chat Room</DialogTitle>
         <DialogContent>
-          <DialogContentText>
+          <DialogContentText className="popup-main-text">
             Please enter an email address for the user you wish to chat with
           </DialogContentText>
           <TextField
             InputLabelProps={{
-              style: { color: "#f59e0b" },
+              style: { color: "#78716c" },
             }}
             sx={{
               "& .MuiInput-underline:after": {
-                borderBottomColor: "#f59e0b",
+                borderBottomColor: "#ef4444",
               },
             }}
             value={input}
@@ -88,10 +88,10 @@ const Popup = () => {
           />
         </DialogContent>
         <DialogActions>
-          <Button className="button-popup" onClick={handleClose}>
+          <Button className="button-popup-cancel" onClick={handleClose}>
             Cancel
           </Button>
-          <Button className="button-popup" onClick={createChat}>
+          <Button className="button-popup-chat" onClick={createChat}>
             Create Chat
           </Button>
         </DialogActions>

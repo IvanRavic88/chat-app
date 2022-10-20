@@ -13,6 +13,7 @@ import Button from "@mui/material/Button";
 const Sidebar = () => {
   const { handleShowSidebar, showSidebar } = useStateContext();
   const [user] = useAuthState(auth);
+
   const userChatRef = query(
     collection(db, "chats"),
     where("users", "array-contains", user.email)
@@ -32,7 +33,7 @@ const Sidebar = () => {
   return (
     <div className="relative text-sm md:text-base">
       <div className=" z-[100] absolute md:relative flex-1 bg-zinc-900  h-[100vh] max-w-xs  overflow-y-scroll no-scrollbar">
-        <div className="text-white flex bg-zinc-900 sticky z-50 space-x-3 items-center p-3 h-20 border-2 border-red-500 ">
+        <div className="text-white flex bg-zinc-900 sticky z-50 space-x-3 items-center p-3 h-20 border-r-2 border-amber-500 ">
           <Avatar
             className="cursor-pointer hover:opacity-75"
             src={user?.photoURL}
