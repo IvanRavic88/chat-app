@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  html,
+  body {
+    height: 100%;
+    margin: 0;
+  }
+}
+
 @layer utilities {
   /* Chrome, Safari and Opera */
   .no-scrollbar::-webkit-scrollbar {
@@ -13,6 +21,7 @@
     scrollbar-width: none; /* Firefox */
   }
 }
+
 @layer components {
   .hide {
     @apply md:hidden  !important;

@@ -227,7 +227,7 @@ const ChatScreen = ({ messages, chat }) => {
 
       <div ref={endOfMessagesRef} className="absolute bottom-0"></div>
 
-      <form className="flex items-center sticky bottom-0 p-2 bg-white z-50 rounded-full">
+      <form className="flex  items-center sticky bottom-0 p-2 bg-white z-50 rounded-full">
         <IconButton onClick={handleViewEmoji}>
           <InsertEmoticonIcon className=" text-yellow-500 hover:text-yellow-600 hover:scale-110" />
         </IconButton>
