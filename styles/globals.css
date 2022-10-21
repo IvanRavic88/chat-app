@@ -15,7 +15,10 @@
 }
 @layer components {
   .hide {
-    @apply md:hidden !important;
+    @apply md:hidden  !important;
+  }
+  .close-icon {
+    @apply text-red-500 text-4xl !important;
   }
   .popup-main-text {
     @apply text-zinc-900 !important;

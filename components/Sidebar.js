@@ -11,7 +11,7 @@ import { useStateContext } from "../contex/StateContex";
 import Button from "@mui/material/Button";
 
 const Sidebar = () => {
-  const { handleShowSidebar, showSidebar } = useStateContext();
+  const { handleShowSidebar, showSidebar, isDesktop } = useStateContext();
   const [user] = useAuthState(auth);
 
   const userChatRef = query(
@@ -31,9 +31,15 @@ const Sidebar = () => {
   });
 
   return (
-    <div className="relative text-sm md:text-base">
-      <div className=" z-[100] absolute md:relative flex-1 bg-zinc-900  h-[100vh] max-w-xs  overflow-y-scroll no-scrollbar">
-        <div className="text-white flex bg-zinc-900 sticky z-50 space-x-3 items-center p-3 h-20 border-r-2 border-amber-500 ">
+    <div className="relative text-sm md:text-base items-center">
+      <div
+        className={
+          isDesktop
+            ? "items-center z-[100] absolute md:relative flex-1 bg-zinc-900 h-[100vh] max-w-xs  overflow-y-scroll no-scrollbar"
+            : "items-center z-[100] absolute md:relative flex-1 bg-zinc-900 h-[100vh] w-screen p-2 overflow-y-scroll no-scrollbar"
+        }
+      >
+        <div className="justify-between text-white flex bg-zinc-900 sticky z-50 space-x-3 items-center p-3 h-20 border-r-2 border-b-2 border-r-amber-500 border-b-rose-500">
           <Avatar
             className="cursor-pointer hover:opacity-75"
             src={user?.photoURL}

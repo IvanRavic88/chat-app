@@ -1,8 +1,12 @@
 import SearchIcon from "@mui/icons-material/Search";
 import { useState } from "react";
 import router from "next/router";
+import { useStateContext } from "../contex/StateContex";
+import CloseIcon from "@mui/icons-material/Close";
+import IconButton from "@mui/material/IconButton";
 
 const SearchUser = ({ openChatsWith }) => {
+  const { showSidebar, handleShowSidebar } = useStateContext();
   const [searchUser, setSearchUser] = useState({});
   const [input, setInput] = useState("");
 
@@ -29,18 +33,30 @@ const SearchUser = ({ openChatsWith }) => {
   };
 
   return (
-    <div className="items-center justify-center w-full relative">
-      <div className="border bg-white rounded-full w-full focus-within:shadow-amber-500  focus-within:shadow-md max-w-md border-gray-200 pl-3 py-1 items-center">
+    <div className="flex flex-wrap items-center  w-screen justify-center relative">
+      <div className="mb-5">
+        {showSidebar && (
+          <IconButton
+            className="hide"
+            onClick={() => {
+              handleShowSidebar(false);
+            }}
+          >
+            <CloseIcon className="close-icon hover:scale-110 hover:easy-in-out hover:duration-100" />
+          </IconButton>
+        )}
+      </div>
+      <div className="border flex bg-white rounded-full w-full focus-within:shadow-amber-500  focus-within:shadow-md  border-gray-200 p-3 py-1 items-center">
         <SearchIcon className="text-rose-700" />
         <input
-          className="outline-none flex-1 ml-2 "
+          className="outline-none ml-2 w-full"
           placeholder="Search chats"
           onChange={handleSearchUser}
           value={input}
         />
       </div>
       {searchUser.length ? (
-        <div className="border-2 border-white absolute z-50 bg-zinc-800 mt-2 p-2 rounded-lg h-fit border-solid boc-shadow shadow-lg w-full">
+        <div className="border-2 border-white absolute z-50 bg-zinc-800 mt-2 p-2 rounded-lg h-fit border-solid w-full">
           {searchUser.slice(0, 5).map(({ userEmail, chatId }) => {
             return (
               <div

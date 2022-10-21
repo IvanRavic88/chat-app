@@ -1,5 +1,5 @@
 import Avatar from "@mui/material/Avatar";
-import CloseIcon from "@mui/icons-material/Close";
+
 import MenuIcon from "@mui/icons-material/Menu";
 import IconButton from "@mui/material/IconButton";
 import { useState, useRef, createRef, useEffect } from "react";
@@ -41,7 +41,7 @@ import Image from "next/image";
 import { useStateContext } from "../contex/StateContex";
 
 const ChatScreen = ({ messages, chat }) => {
-  const { showSidebar, handleShowSidebar } = useStateContext();
+  const { showSidebar, handleShowSidebar, isDesktop } = useStateContext();
   const [imageToMessage, setImageToMessage] = useState(null);
   const inputRef = createRef();
   const [showEmoji, setShowEmoji] = useState(false);
@@ -207,16 +207,7 @@ const ChatScreen = ({ messages, chat }) => {
             <p className="text-gray-500 text-xs">Loading last active...</p>
           )}
         </div>
-        {showSidebar ? (
-          <IconButton
-            className="hide"
-            onClick={() => {
-              handleShowSidebar(false);
-            }}
-          >
-            <CloseIcon className=" text-red-500 hover:scale-110 hover:easy-in-out hover:duration-100" />
-          </IconButton>
-        ) : (
+        {!showSidebar && (
           <IconButton
             className="hide"
             onClick={() => {
