@@ -28,7 +28,7 @@ const Chat = ({ id, users }) => {
 
   return (
     <div
-      className="m-3 bg-white rounded-xl flex items-center cursor-pointer p-3 break-word hover:bg-red-500 hover:shadow-xl hover:text-white  border-b-4 border-solid border-red-500"
+      className="m-3 bg-white rounded-xl flex items-center cursor-pointer p-3 break-word hover:bg-red-500 hover:shadow-xl hover:text-white  border-b-4 border-solid border-amber-500"
       onClick={enterChat}
     >
       {recipient ? (

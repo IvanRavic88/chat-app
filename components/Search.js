@@ -56,13 +56,13 @@ const SearchUser = ({ openChatsWith }) => {
         />
       </div>
       {searchUser.length ? (
-        <div className="border-2 border-white absolute z-50 bg-zinc-800 mt-2 p-2 rounded-lg h-fit border-solid w-full">
+        <div className="border-2 top-10 border-white absolute z-50 bg-zinc-800 mt-2 p-2 rounded-lg h-fit border-solid w-full">
           {searchUser.slice(0, 5).map(({ userEmail, chatId }) => {
             return (
               <div
                 key={chatId}
                 onClick={() => enterChat(chatId)}
-                className="white cursor-pointer bg-zinc-800 border-rose-500 border-b-2 text-white rounded-lg w-[100%] flex items-center mb-1 justify-center p-1 hover:bg-rose-500 hover:text-white"
+                className="white cursor-pointer bg-zinc-800 border-red-500 border-b-2 text-white rounded-lg w-[100%] flex items-center mb-1 justify-center p-1 hover:bg-red-500 hover:text-white"
               >
                 <p>{userEmail}</p>
               </div>

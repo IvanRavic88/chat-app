@@ -214,7 +214,7 @@ const ChatScreen = ({ messages, chat }) => {
               handleShowSidebar(true);
             }}
           >
-            <MenuIcon className=" text-red-500 hover:scale-110 hover:easy-in-out hover:duration-100" />
+            <MenuIcon className=" text-red-500 hover:text-amber-500 hover:scale-110 hover:easy-in-out hover:duration-100" />
           </IconButton>
         )}
         <div onClick={logOut} className="cursor-pointer p-2 hidden md:flex">

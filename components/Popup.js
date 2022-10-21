@@ -58,7 +58,7 @@ const Popup = () => {
     <div>
       <div>
         <IconButton onClick={handleClickOpen}>
-          <ChatIcon className="text-red-500" />
+          <ChatIcon className="hover:text-red-500 text-amber-500" />
         </IconButton>
       </div>
       <Dialog open={open} onClose={handleClose}>
