@@ -1,5 +1,4 @@
 import Avatar from "@mui/material/Avatar";
-
 import MenuIcon from "@mui/icons-material/Menu";
 import IconButton from "@mui/material/IconButton";
 import { useState, useRef, createRef, useEffect } from "react";
@@ -69,6 +68,7 @@ const ChatScreen = ({ messages, chat }) => {
     const end = input.substring(ref.selectionStart);
     const text = start + emoji + end;
     setInput(text);
+    setShowEmoji(false);
   };
   //open window for selecting emoji
   const handleViewEmoji = () => {
@@ -182,6 +182,7 @@ const ChatScreen = ({ messages, chat }) => {
   const recipient = recipentSnapshot?.docs?.[0]?.data();
   const logOut = () => {
     signOut(auth);
+    router.push("/");
   };
   return (
     <div className="relative min-h-screen no-scroll">
@@ -218,7 +219,9 @@ const ChatScreen = ({ messages, chat }) => {
           </IconButton>
         )}
         <div onClick={logOut} className="cursor-pointer p-2 hidden md:flex">
-          <h2 className="text-red-500 hover:scale-110">Logout</h2>
+          <h2 className="text-red-500 hover:scale-110 hover:text-amber-500">
+            Logout
+          </h2>
         </div>
       </header>
       <div className="p-3 pb-20 pt-20 bg-gray-50 min-h-[90vh]">
@@ -229,7 +232,7 @@ const ChatScreen = ({ messages, chat }) => {
 
       <form className="flex  items-center sticky bottom-0 p-2 bg-white z-50 rounded-full">
         <IconButton onClick={handleViewEmoji}>
-          <InsertEmoticonIcon className=" text-yellow-500 hover:text-yellow-600 hover:scale-110" />
+          <InsertEmoticonIcon className=" text-yellow-500 hover:text-red-500 hover:scale-110" />
         </IconButton>
         <input
           ref={inputRef}
@@ -239,8 +242,15 @@ const ChatScreen = ({ messages, chat }) => {
           onChange={(e) => setInput(e.target.value)}
         />{" "}
         {showEmoji && (
-          <div className="absolute bottom-[5rem] z-50">
-            <Picker onEmojiClick={emojiChoice} />
+          <div className="absolute bottom-14 z-50">
+            <Picker
+              showSkinTone={false}
+              showPreview={false}
+              emojiStyle="google"
+              lazyLoadEmojis={true}
+              searchDisabled={true}
+              onEmojiClick={emojiChoice}
+            />
           </div>
         )}
         <button
@@ -267,7 +277,7 @@ const ChatScreen = ({ messages, chat }) => {
           </div>
         )}
         <IconButton onClick={() => filePickerRef.current.click()}>
-          <AddAPhotoIcon className="text-red-500 hover:text-red-600 hover:scale-110 ease-in duration-500" />
+          <AddAPhotoIcon className="text-red-500 hover:text-amber-500 hover:scale-110 ease-in duration-500" />
           <input
             ref={filePickerRef}
             onChange={addImageToMessage}

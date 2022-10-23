@@ -3,11 +3,16 @@
 @tailwind utilities;
 
 @layer base {
-  html,
+  html {
+    overflow: hidden;
+    width: 100%;
+  }
   body {
     height: 100%;
+    position: fixed;
     margin: 0;
-    overflow: hidden;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
   }
 }
 

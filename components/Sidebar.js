@@ -9,11 +9,12 @@ import { signOut } from "firebase/auth";
 import Popup from "./Popup";
 import { useStateContext } from "../contex/StateContex";
 import Button from "@mui/material/Button";
+import { useRouter } from "next/router";
 
 const Sidebar = () => {
   const { handleShowSidebar, showSidebar, isDesktop } = useStateContext();
   const [user] = useAuthState(auth);
-
+  const router = useRouter();
   const userChatRef = query(
     collection(db, "chats"),
     where("users", "array-contains", user.email)
@@ -29,7 +30,10 @@ const Sidebar = () => {
         openChatsWith.push({ chatId: chatId, userEmail: userEmail });
     });
   });
-
+  const logOut = () => {
+    signOut(auth);
+    router.push("/");
+  };
   return (
     <div className="relative text-sm md:text-base items-center">
       <div
@@ -43,7 +47,7 @@ const Sidebar = () => {
           <Avatar
             className="cursor-pointer hover:opacity-75"
             src={user?.photoURL}
-            onClick={() => signOut(auth)}
+            onClick={logOut}
           />
           <p>{user.email}</p>
           <Popup />

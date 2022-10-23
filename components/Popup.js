@@ -69,7 +69,7 @@ const Popup = () => {
           </DialogContentText>
           <TextField
             InputLabelProps={{
-              style: { color: "#78716c" },
+              style: { color: "#ef4444" },
             }}
             sx={{
               "& .MuiInput-underline:after": {
