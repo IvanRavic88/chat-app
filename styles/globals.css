@@ -19,6 +19,8 @@
 
 @layer utilities {
   .mobile-view {
+    display: flex;
+    flex-direction: column;
     height: -webkit-fill-available;
   }
   /* Chrome, Safari and Opera */

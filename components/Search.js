@@ -61,7 +61,10 @@ const SearchUser = ({ openChatsWith }) => {
             return (
               <div
                 key={chatId}
-                onClick={() => enterChat(chatId)}
+                onClick={() => {
+                  enterChat(chatId);
+                  handleShowSidebar(false);
+                }}
                 className="white cursor-pointer bg-zinc-800 border-red-500 border-b-2 text-white rounded-lg w-[100%] flex items-center mb-1 justify-center p-1 hover:bg-red-500 hover:text-white"
               >
                 <p>{userEmail}</p>
