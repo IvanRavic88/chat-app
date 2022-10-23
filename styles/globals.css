@@ -13,14 +13,14 @@
     height: -webkit-fill-available;
   }
   body {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
     height: -webkit-fill-available;
   }
 }
 
 @layer utilities {
+  .mobile-view {
+    height: -webkit-fill-available;
+  }
   /* Chrome, Safari and Opera */
   .no-scrollbar::-webkit-scrollbar {
     display: none;
