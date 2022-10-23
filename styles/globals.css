@@ -10,10 +10,8 @@
     font-family: "Poppins", sans-serif;
   }
   html {
-    height: -webkit-fill-available;
   }
   body {
-    height: -webkit-fill-available;
   }
 }
 
@@ -22,7 +20,6 @@
     display: flex;
     flex-direction: column;
     max-height: 100%;
-    height: -webkit-fill-available;
   }
   /* Chrome, Safari and Opera */
   .no-scrollbar::-webkit-scrollbar {
