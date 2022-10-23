@@ -185,109 +185,107 @@ const ChatScreen = ({ messages, chat }) => {
     router.push("/");
   };
   return (
-    <div className="h-[100vh] .mobile-view relative">
-      <div className="relative">
-        <header className="flex sticky top-0 bg-zinc-900 p-3 items-center z-50 h-20 ">
-          {recipient ? (
-            <Avatar src={recipient?.photo} alt="User photo" />
+    <div className="relative">
+      <header className="flex sticky top-0 bg-zinc-900 p-3 items-center z-50 h-20 ">
+        {recipient ? (
+          <Avatar src={recipient?.photo} alt="User photo" />
+        ) : (
+          <Avatar alt="User photo">{recipientEmail[0]}</Avatar>
+        )}
+
+        <div className="ml-2 flex-1 ">
+          <h3 className="mb-1 text-white">{recipientEmail}</h3>
+          {recipentSnapshot ? (
+            <p className="text-zinc-400 text-xs">
+              Last active: {` `}
+              {recipient?.lastSeen?.toDate() ? (
+                <TimeAgo datetime={recipient?.lastSeen?.toDate()} />
+              ) : (
+                "Unavailable"
+              )}
+            </p>
           ) : (
-            <Avatar alt="User photo">{recipientEmail[0]}</Avatar>
+            <p className="text-gray-500 text-xs">Loading last active...</p>
           )}
-
-          <div className="ml-2 flex-1 ">
-            <h3 className="mb-1 text-white">{recipientEmail}</h3>
-            {recipentSnapshot ? (
-              <p className="text-zinc-400 text-xs">
-                Last active: {` `}
-                {recipient?.lastSeen?.toDate() ? (
-                  <TimeAgo datetime={recipient?.lastSeen?.toDate()} />
-                ) : (
-                  "Unavailable"
-                )}
-              </p>
-            ) : (
-              <p className="text-gray-500 text-xs">Loading last active...</p>
-            )}
-          </div>
-          {!showSidebar && (
-            <IconButton
-              className="hide"
-              onClick={() => {
-                handleShowSidebar(true);
-              }}
-            >
-              <MenuIcon className=" text-red-500 hover:text-amber-500 hover:scale-110 hover:easy-in-out hover:duration-100" />
-            </IconButton>
-          )}
-          <div onClick={logOut} className="cursor-pointer p-2 hidden md:flex">
-            <h2 className="text-red-500 hover:scale-110 hover:text-amber-500">
-              Logout
-            </h2>
-          </div>
-        </header>
-        <div className="p-3 pb-20 pt-20 bg-gray-50 min-h-[90vh]">
-          {showMessages()}
         </div>
-
-        <div ref={endOfMessagesRef} className="absolute bottom-0"></div>
-
-        <form className="flex  items-center sticky bottom-0 p-2 bg-white z-50 rounded-full">
-          <IconButton onClick={handleViewEmoji}>
-            <InsertEmoticonIcon className=" text-yellow-500 hover:text-red-500 hover:scale-110" />
-          </IconButton>
-          <input
-            ref={inputRef}
-            className="flex-1 outline-none bg-zinc-200 rounded-full p-2 pl-5 ml-2 mr-2"
-            placeholder="Type a message here..."
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-          />{" "}
-          {showEmoji && (
-            <div className="absolute bottom-14 z-50">
-              <Picker
-                showSkinTone={false}
-                showPreview={false}
-                emojiStyle="google"
-                lazyLoadEmojis={true}
-                searchDisabled={true}
-                onEmojiClick={emojiChoice}
-              />
-            </div>
-          )}
-          <button
-            hidden
-            disabled={!input & !imageToMessage}
-            type="submit"
-            onClick={sendMessage}
+        {!showSidebar && (
+          <IconButton
+            className="hide"
+            onClick={() => {
+              handleShowSidebar(true);
+            }}
           >
-            Send message
-          </button>
-          {imageToMessage && (
-            <div
-              onClick={removeImage}
-              className="flex flex-col filter hover: brightness-110 transition duration-150 transform hover:scale-105 cursor-pointer"
-            >
-              <Image
-                width={25}
-                height={25}
-                className="object-contain"
-                src={imageToMessage}
-                alt="Message from user"
-              />
-              <p className="text-xs text-red-500 text-center">Remove</p>
-            </div>
-          )}
-          <IconButton onClick={() => filePickerRef.current.click()}>
-            <AddAPhotoIcon className="text-red-500 hover:text-amber-500 hover:scale-110 ease-in duration-500" />
-            <input
-              ref={filePickerRef}
-              onChange={addImageToMessage}
-              type="file"
-              hidden
-            ></input>
+            <MenuIcon className=" text-red-500 hover:text-amber-500 hover:scale-110 hover:easy-in-out hover:duration-100" />
           </IconButton>
-        </form>
+        )}
+        <div onClick={logOut} className="cursor-pointer p-2 hidden md:flex">
+          <h2 className="text-red-500 hover:scale-110 hover:text-amber-500">
+            Logout
+          </h2>
+        </div>
+      </header>
+      <div className="p-3 pb-20 pt-20 bg-gray-50 min-h-[90vh]">
+        {showMessages()}
       </div>
+
+      <div ref={endOfMessagesRef} className="absolute bottom-0"></div>
+
+      <form className="flex  items-center sticky bottom-0 p-2 bg-white z-50 rounded-full">
+        <IconButton onClick={handleViewEmoji}>
+          <InsertEmoticonIcon className=" text-yellow-500 hover:text-red-500 hover:scale-110" />
+        </IconButton>
+        <input
+          ref={inputRef}
+          className="flex-1 outline-none bg-zinc-200 rounded-full p-2 pl-5 ml-2 mr-2"
+          placeholder="Type a message here..."
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+        />{" "}
+        {showEmoji && (
+          <div className="absolute bottom-14 z-50">
+            <Picker
+              showSkinTone={false}
+              showPreview={false}
+              emojiStyle="google"
+              lazyLoadEmojis={true}
+              searchDisabled={true}
+              onEmojiClick={emojiChoice}
+            />
+          </div>
+        )}
+        <button
+          hidden
+          disabled={!input & !imageToMessage}
+          type="submit"
+          onClick={sendMessage}
+        >
+          Send message
+        </button>
+        {imageToMessage && (
+          <div
+            onClick={removeImage}
+            className="flex flex-col filter hover: brightness-110 transition duration-150 transform hover:scale-105 cursor-pointer"
+          >
+            <Image
+              width={25}
+              height={25}
+              className="object-contain"
+              src={imageToMessage}
+              alt="Message from user"
+            />
+            <p className="text-xs text-red-500 text-center">Remove</p>
+          </div>
+        )}
+        <IconButton onClick={() => filePickerRef.current.click()}>
+          <AddAPhotoIcon className="text-red-500 hover:text-amber-500 hover:scale-110 ease-in duration-500" />
+          <input
+            ref={filePickerRef}
+            onChange={addImageToMessage}
+            type="file"
+            hidden
+          ></input>
+        </IconButton>
+      </form>
     </div>
   );
 };
