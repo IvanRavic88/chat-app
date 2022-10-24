@@ -25,7 +25,13 @@ const Chat = ({ chat, messages }) => {
       </Head>
 
       {(showSidebar || isDesktop) && <Sidebar />}
-      <div className="no-scrollbar flex-1 overflow-scroll h-[100vh] .mobile-view">
+      <div
+        className={
+          isDesktop
+            ? "no-scrollbar flex-1 overflow-scroll h-[100vh] w-[100vw]"
+            : "no-scrollbar flex-1 overflow-scroll h-[100vh] fixed"
+        }
+      >
         <ChatScreen chat={chat} messages={messages} />
       </div>
     </div>

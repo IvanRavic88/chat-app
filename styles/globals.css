@@ -9,22 +9,19 @@
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
   }
-  html {
-    min-height: -webkit-fill-available;
-  }
+  html,
   body {
-    min-height: 100vh;
-    min-height: -webkit-fill-available;
+    height: 100%;
   }
 }
 
 @layer utilities {
   .mobile-view {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    min-height: -webkit-fill-available;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
   }
+
   /* Chrome, Safari and Opera */
   .no-scrollbar::-webkit-scrollbar {
     display: none;

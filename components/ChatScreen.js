@@ -185,7 +185,7 @@ const ChatScreen = ({ messages, chat }) => {
     router.push("/");
   };
   return (
-    <div className="relative flex-1">
+    <div className="flex-1 relative">
       <header className="flex sticky top-0 bg-zinc-900 p-3 items-center z-50 h-20 ">
         {recipient ? (
           <Avatar src={recipient?.photo} alt="User photo" />
