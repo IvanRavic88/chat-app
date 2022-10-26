@@ -16,12 +16,6 @@
 }
 
 @layer utilities {
-  .mobile-view {
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-  }
-
   /* Chrome, Safari and Opera */
   .no-scrollbar::-webkit-scrollbar {
     display: none;
