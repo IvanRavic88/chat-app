@@ -13,10 +13,23 @@ import { auth, db } from "../../utils/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import getRecipientEmail from "../../utils/getRecipientEmail";
 import { useStateContext } from "../../contex/StateContex";
+import { useEffect, useState } from "react";
 
 const Chat = ({ chat, messages }) => {
   const { showSidebar, isDesktop } = useStateContext();
   const [user] = useAuthState(auth);
+  const [vh, setVh] = useState(window.innerHeight);
+
+  useEffect(() => {
+    const updateVh = () => {
+      setVh(window.innerHeight);
+    };
+    window.addEventListener("resize", updateVh);
+
+    return () => {
+      return () => window.removeEventListener("resize", updateVh);
+    };
+  }, []);
 
   return (
     <div className="flex no-scrollbar">
@@ -26,7 +39,10 @@ const Chat = ({ chat, messages }) => {
 
       {(showSidebar || isDesktop) && <Sidebar />}
 
-      <div className="no-scrollbar flex-1 overflow-scroll h-screen w-screen max-h-full">
+      <div
+        style={{ height: vh }}
+        className="no-scrollbar flex-1 overflow-scroll w-screen"
+      >
         <ChatScreen chat={chat} messages={messages} />
       </div>
     </div>
