@@ -14,8 +14,6 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import getRecipientEmail from "../../utils/getRecipientEmail";
 import { useStateContext } from "../../contex/StateContex";
 
-import Div100vh from "react-div-100vh";
-
 const Chat = ({ chat, messages }) => {
   const { showSidebar, isDesktop } = useStateContext();
   const [user] = useAuthState(auth);
@@ -27,11 +25,10 @@ const Chat = ({ chat, messages }) => {
       </Head>
 
       {(showSidebar || isDesktop) && <Sidebar />}
-      <Div100vh>
-        <div className="no-scrollbar flex-1 overflow-scroll h-[100vh] w-[100vw]">
-          <ChatScreen chat={chat} messages={messages} />
-        </div>
-      </Div100vh>
+
+      <div className="no-scrollbar flex-1 overflow-scroll h-screen w-screen max-h-full">
+        <ChatScreen chat={chat} messages={messages} />
+      </div>
     </div>
   );
 };
