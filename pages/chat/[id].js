@@ -20,6 +20,7 @@ const Chat = ({ chat, messages }) => {
   const [user] = useAuthState(auth);
   const [vh, setVh] = useState(window.innerHeight);
 
+  // fix for mobile browser (problem with 100vh and URL bar)
   useEffect(() => {
     const updateVh = () => {
       setVh(window.innerHeight);
@@ -36,7 +37,6 @@ const Chat = ({ chat, messages }) => {
       <Head>
         <title>Chat whit {getRecipientEmail(chat.users, user)}</title>
       </Head>
-
       {(showSidebar || isDesktop) && <Sidebar />}
 
       <div

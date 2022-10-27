@@ -7,6 +7,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db, storage } from "../utils/firebase";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import { useCollection } from "react-firebase-hooks/firestore";
+import SendOutlinedIcon from "@mui/icons-material/SendOutlined";
 import {
   addDoc,
   collection,
@@ -40,7 +41,7 @@ import Image from "next/image";
 import { useStateContext } from "../contex/StateContex";
 
 const ChatScreen = ({ messages, chat }) => {
-  const { showSidebar, handleShowSidebar, isDesktop } = useStateContext();
+  const { showSidebar, handleShowSidebar } = useStateContext();
   const [imageToMessage, setImageToMessage] = useState(null);
   const inputRef = createRef();
   const [showEmoji, setShowEmoji] = useState(false);
@@ -176,6 +177,7 @@ const ChatScreen = ({ messages, chat }) => {
     };
     scrollToBottom();
   };
+
   const removeImage = () => setImageToMessage(null);
 
   const recipientEmail = getRecipientEmail(chat.users, user);
@@ -184,6 +186,10 @@ const ChatScreen = ({ messages, chat }) => {
     signOut(auth);
     router.push("/");
   };
+
+  // if no text or image then disable send button
+  const disableSendButton = !input & !imageToMessage;
+
   return (
     <div className="flex-1 relative">
       <header className="flex sticky top-0 bg-zinc-900 p-3 items-center z-50 h-20 ">
@@ -224,19 +230,25 @@ const ChatScreen = ({ messages, chat }) => {
           </h2>
         </div>
       </header>
-      <div className="p-3 pb-20 pt-20 bg-gray-50 min-h-[90vh]">
-        {showMessages()}
-      </div>
+
+      <Image
+        src="/login-picture.jpg"
+        layout="fill"
+        className="absolute w-full h-full object-cover mix-blend-overlay "
+        alt="Young people next to a laptop."
+      />
+
+      <div className="p-3 pb-20 pt-20  min-h-[90vh]">{showMessages()}</div>
 
       <div ref={endOfMessagesRef} className="absolute bottom-0"></div>
 
-      <form className="flex  items-center sticky bottom-0 p-2 bg-white z-50 rounded-full">
+      <form className="flex  items-center sticky  bottom-0 p-2 z-50 rounded-full">
         <IconButton onClick={handleViewEmoji}>
-          <InsertEmoticonIcon className=" text-yellow-500 hover:text-red-500 hover:scale-110" />
+          <InsertEmoticonIcon className=" text-amber-500 hover:text-red-500 hover:scale-110" />
         </IconButton>
         <input
           ref={inputRef}
-          className="flex-1 outline-none bg-zinc-200 rounded-full p-2 pl-5 ml-2 mr-2"
+          className="flex-1 outline-none bg-white rounded-full p-2 pl-5 ml-2 mr-2"
           placeholder="Type a message here..."
           value={input}
           onChange={(e) => setInput(e.target.value)}
@@ -253,14 +265,6 @@ const ChatScreen = ({ messages, chat }) => {
             />
           </div>
         )}
-        <button
-          hidden
-          disabled={!input & !imageToMessage}
-          type="submit"
-          onClick={sendMessage}
-        >
-          Send message
-        </button>
         {imageToMessage && (
           <div
             onClick={removeImage}
@@ -284,6 +288,19 @@ const ChatScreen = ({ messages, chat }) => {
             type="file"
             hidden
           ></input>
+        </IconButton>
+        <IconButton
+          disabled={disableSendButton}
+          type="submit"
+          onClick={sendMessage}
+        >
+          <SendOutlinedIcon
+            className={
+              disableSendButton
+                ? "text-gray-500"
+                : "text-green-500 hover:text-amber-500"
+            }
+          />
         </IconButton>
       </form>
     </div>

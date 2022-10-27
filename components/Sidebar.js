@@ -45,7 +45,7 @@ const Sidebar = () => {
       >
         <div className="justify-between text-white flex bg-zinc-900 sticky z-50 space-x-3 items-center p-3 h-20 border-r-2 border-b-2 border-r-amber-500 border-b-rose-500">
           <Avatar
-            className="cursor-pointer hover:opacity-75"
+            className="cursor-pointer hover:opacity-75 hover:scale-110"
             src={user?.photoURL}
             onClick={logOut}
           />
