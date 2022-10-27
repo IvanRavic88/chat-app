@@ -224,7 +224,7 @@ const ChatScreen = ({ messages, chat }) => {
             <MenuIcon className=" text-red-500 hover:text-amber-500 hover:scale-110 hover:easy-in-out hover:duration-100" />
           </IconButton>
         )}
-        <div onClick={logOut} className="cursor-pointer p-2 hidden md:flex">
+        <div onClick={logOut} className="cursor-pointer p-2 hidden md:flex ">
           <h2 className="text-red-500 hover:scale-110 hover:text-amber-500">
             Logout
           </h2>
@@ -232,9 +232,10 @@ const ChatScreen = ({ messages, chat }) => {
       </header>
 
       <Image
+        // style={{ filter: "opacity(80%)" }}
         src="/login-picture.jpg"
         layout="fill"
-        className="absolute w-full h-full object-cover mix-blend-overlay "
+        className="absolute w-full h-full object-cover mix-blend-overlay opacity-70"
         alt="Young people next to a laptop."
       />
 
@@ -243,13 +244,25 @@ const ChatScreen = ({ messages, chat }) => {
       <div ref={endOfMessagesRef} className="absolute bottom-0"></div>
 
       <form className="flex  items-center sticky  bottom-0 p-2 z-50 rounded-full">
-        <IconButton onClick={handleViewEmoji}>
+        <IconButton
+          className="icon-button-padding"
+          onClick={() => filePickerRef.current.click()}
+        >
+          <AddAPhotoIcon className="text-red-500 hover:text-amber-500 hover:scale-110 ease-in duration-500" />
+          <input
+            ref={filePickerRef}
+            onChange={addImageToMessage}
+            type="file"
+            hidden
+          ></input>
+        </IconButton>
+        <IconButton className="icon-button-padding" onClick={handleViewEmoji}>
           <InsertEmoticonIcon className=" text-amber-500 hover:text-red-500 hover:scale-110" />
         </IconButton>
         <input
           ref={inputRef}
           className="flex-1 outline-none bg-white rounded-full p-2 pl-5 ml-2 mr-2"
-          placeholder="Type a message here..."
+          placeholder="Type a message..."
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />{" "}
@@ -280,16 +293,8 @@ const ChatScreen = ({ messages, chat }) => {
             <p className="text-xs text-red-500 text-center">Remove</p>
           </div>
         )}
-        <IconButton onClick={() => filePickerRef.current.click()}>
-          <AddAPhotoIcon className="text-red-500 hover:text-amber-500 hover:scale-110 ease-in duration-500" />
-          <input
-            ref={filePickerRef}
-            onChange={addImageToMessage}
-            type="file"
-            hidden
-          ></input>
-        </IconButton>
         <IconButton
+          className="icon-button-padding"
           disabled={disableSendButton}
           type="submit"
           onClick={sendMessage}
