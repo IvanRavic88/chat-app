@@ -232,7 +232,6 @@ const ChatScreen = ({ messages, chat }) => {
       </header>
 
       <Image
-        // style={{ filter: "opacity(80%)" }}
         src="/login-picture.jpg"
         layout="fill"
         className="absolute w-full h-full object-cover mix-blend-overlay opacity-70"
@@ -261,7 +260,7 @@ const ChatScreen = ({ messages, chat }) => {
         </IconButton>
         <input
           ref={inputRef}
-          className="flex-1 outline-none bg-white rounded-full p-2 pl-5 ml-2 mr-2"
+          className="flex-1 outline-none bg-white rounded-full p-1 pl-3 ml-1 mr-1 md:p-3 md:pl-5 md:ml-2 md:mr-2"
           placeholder="Type a message..."
           value={input}
           onChange={(e) => setInput(e.target.value)}
