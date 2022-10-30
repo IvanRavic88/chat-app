@@ -18,22 +18,21 @@ const Sidebar = () => {
   const openChatsWith = [];
   const chatsSnapshot = [];
 
-  if (user !== null) {
-    const userChatRef = query(
-      collection(db, "chats"),
-      where("users", "array-contains", user?.email)
-    );
+  const userChatRef = query(
+    collection(db, "chats"),
+    where("users", "array-contains", user?.email)
+  );
 
-    [chatsSnapshot] = useCollection(userChatRef);
+  [chatsSnapshot] = useCollection(userChatRef);
 
-    chatsSnapshot?.docs?.map((chat) => {
-      const chatId = chat.id;
-      chat.data().users.filter((userEmail) => {
-        if (userEmail !== user.email)
-          openChatsWith.push({ chatId: chatId, userEmail: userEmail });
-      });
+  chatsSnapshot?.docs?.map((chat) => {
+    const chatId = chat.id;
+    chat.data().users.filter((userEmail) => {
+      if (userEmail !== user.email)
+        openChatsWith.push({ chatId: chatId, userEmail: userEmail });
     });
-  }
+  });
+
   const logOut = () => {
     signOut(auth);
     router.push("/");
@@ -54,7 +53,7 @@ const Sidebar = () => {
             onClick={logOut}
           />
           <p>{user?.email}</p>
-          {user && <Popup />}
+          && <Popup />
         </div>
 
         <div className="flex items-center p-5 rounded-sm">

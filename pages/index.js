@@ -1,8 +1,11 @@
 import Head from "next/head";
 import Sidebar from "../components/Sidebar";
 import Image from "next/image";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../utils/firebase";
 
 const Home = () => {
+  const [user] = useAuthState(auth);
   return (
     <div className="no-scrollbar relative">
       <Head>
@@ -16,7 +19,7 @@ const Home = () => {
         className="absolute w-full h-full object-cover mix-blend-overlay"
         alt="Young people next to a laptop."
       />
-      <Sidebar />
+      {user && <Sidebar />}
     </div>
   );
 };
