@@ -53,7 +53,7 @@ const Sidebar = () => {
             onClick={logOut}
           />
           <p>{user?.email}</p>
-          && <Popup />
+          <Popup />
         </div>
 
         <div className="flex items-center p-5 rounded-sm">
