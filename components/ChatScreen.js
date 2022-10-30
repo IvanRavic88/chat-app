@@ -188,7 +188,7 @@ const ChatScreen = ({ messages, chat }) => {
   };
 
   // if no text or image then disable send button
-  const disableSendButton = !input & !imageToMessage;
+  const disableSendButton = !!input || !!imageToMessage;
 
   return (
     <div className="flex-1 relative">

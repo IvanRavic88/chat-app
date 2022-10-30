@@ -15,21 +15,25 @@ const Sidebar = () => {
   const { handleShowSidebar, showSidebar, isDesktop } = useStateContext();
   const [user] = useAuthState(auth);
   const router = useRouter();
-  const userChatRef = query(
-    collection(db, "chats"),
-    where("users", "array-contains", user?.email)
-  );
-
   const openChatsWith = [];
-  const [chatsSnapshot] = useCollection(userChatRef);
+  const chatsSnapshot = [];
 
-  chatsSnapshot?.docs?.map((chat) => {
-    const chatId = chat.id;
-    chat.data().users.filter((userEmail) => {
-      if (userEmail !== user.email)
-        openChatsWith.push({ chatId: chatId, userEmail: userEmail });
+  if (user !== null) {
+    const userChatRef = query(
+      collection(db, "chats"),
+      where("users", "array-contains", user?.email)
+    );
+
+    [chatsSnapshot] = useCollection(userChatRef);
+
+    chatsSnapshot?.docs?.map((chat) => {
+      const chatId = chat.id;
+      chat.data().users.filter((userEmail) => {
+        if (userEmail !== user.email)
+          openChatsWith.push({ chatId: chatId, userEmail: userEmail });
+      });
     });
-  });
+  }
   const logOut = () => {
     signOut(auth);
     router.push("/");
@@ -49,14 +53,14 @@ const Sidebar = () => {
             src={user?.photoURL}
             onClick={logOut}
           />
-          <p>{user.email}</p>
-          <Popup />
+          <p>{user?.email}</p>
+          {user && <Popup />}
         </div>
 
         <div className="flex items-center p-5 rounded-sm">
           <Search openChatsWith={openChatsWith} />
         </div>
-        {chatsSnapshot?.docs.map((chat) => (
+        {chatsSnapshot?.docs?.map((chat) => (
           <Chat key={chat.id} id={chat.id} users={chat.data().users} />
         ))}
         {showSidebar && (
