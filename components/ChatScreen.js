@@ -189,7 +189,7 @@ const ChatScreen = ({ messages, chat }) => {
 
   // if no text or image then disable send button
   const disableSendButton = !!input || !!imageToMessage;
-
+  console.log(disableSendButton);
   return (
     <div className="flex-1 relative">
       <header className="flex sticky top-0 bg-zinc-900 p-3 items-center z-50 h-20 ">
@@ -294,13 +294,13 @@ const ChatScreen = ({ messages, chat }) => {
         )}
         <IconButton
           className="icon-button-padding"
-          disabled={disableSendButton}
+          disabled={!disableSendButton}
           type="submit"
           onClick={sendMessage}
         >
           <SendOutlinedIcon
             className={
-              disableSendButton
+              !disableSendButton
                 ? "text-gray-500"
                 : "text-green-500 hover:text-amber-500"
             }
