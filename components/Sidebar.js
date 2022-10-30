@@ -17,7 +17,7 @@ const Sidebar = () => {
   const router = useRouter();
   const userChatRef = query(
     collection(db, "chats"),
-    where("users", "array-contains", user.email)
+    where("users", "array-contains", user?.email)
   );
 
   const openChatsWith = [];
