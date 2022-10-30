@@ -189,7 +189,7 @@ const ChatScreen = ({ messages, chat }) => {
 
   // if no text or image then disable send button
   const disableSendButton = !!input || !!imageToMessage;
-  console.log(disableSendButton);
+
   return (
     <div className="flex-1 relative">
       <header className="flex sticky top-0 bg-zinc-900 p-3 items-center z-50 h-20 ">
